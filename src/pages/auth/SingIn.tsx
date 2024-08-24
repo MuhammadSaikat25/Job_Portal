@@ -3,8 +3,8 @@ import { FaUserTie } from "react-icons/fa6";
 import { TiShoppingBag } from "react-icons/ti";
 
 type Props = {
-  singUpModal: boolean;
-  setSingUpModal: (singUpModal: boolean) => void;
+  singUpModal?: boolean;
+  setSingUpModal?: (singUpModal: boolean) => void;
 };
 
 const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
@@ -43,13 +43,15 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
 
   return (
     <div className={`absolute top-0 bg-gray-950 bg-opacity-30 w-full h-screen`}>
-      <div className="absolute left-[35%] top-[20%] bg-white text-black h-fit p-7 rounded-md lg:w-[30%]">
-        <span
-          className="absolute top-0 text-gray-950 font-bold cursor-pointer right-1"
-          onClick={() => setSingUpModal(false)}
-        >
-          X
-        </span>
+      <div className="absolute left-[10%] md:left-[30%] md:top-[10%] lg:left-[35%] top-[20%] lg:top-[25%] bg-white text-black h-fit p-7 rounded-md lg:w-[30%]">
+        {setSingUpModal && (
+          <span
+            className="absolute top-0 text-gray-950 font-bold cursor-pointer right-1"
+            onClick={() => setSingUpModal(false)}
+          >
+            X
+          </span>
+        )}
         <h1 className="text-gray-900 font-semibold text-center">
           Create a Free JobHorizon Account
         </h1>

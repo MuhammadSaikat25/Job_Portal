@@ -1,11 +1,11 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 type Props = {
-  loginModal: boolean;
-  setLoginModal: (loginModal: boolean) => void;
+  loginModal?: boolean;
+  setLoginModal?: (loginModal: boolean) => void;
 };
 
 const Login = ({ loginModal, setLoginModal }: Props) => {
-
   useEffect(() => {
     if (loginModal) {
       document.body.style.overflow = "hidden";
@@ -20,13 +20,15 @@ const Login = ({ loginModal, setLoginModal }: Props) => {
 
   return (
     <div className={`absolute top-0 bg-gray-950 bg-opacity-30 w-full h-screen`}>
-      <div className="absolute left-[35%] top-[20%] bg-white text-black h-fit p-7 rounded-md lg:w-[30%]">
-        <span
-          className="absolute top-0 text-gray-950 font-bold cursor-pointer right-1"
-          onClick={() => setLoginModal(false)}
-        >
-          X
-        </span>
+      <div className="absolute left-[20%] md:left-[23%] lg:left-[35%] top-[20%] bg-white text-black h-fit p-7 rounded-md w-[60%] lg:w-[30%]">
+        {setLoginModal && (
+          <span
+            className="absolute top-0 text-gray-950 font-bold cursor-pointer right-1"
+            onClick={() => setLoginModal(false)}
+          >
+            X
+          </span>
+        )}
         <h1 className="text-gray-900 font-semibold">Login to JobHorizon</h1>
         <form className="w-full">
           <div className="flex flex-col gap-y-2 mb-4">
@@ -47,7 +49,9 @@ const Login = ({ loginModal, setLoginModal }: Props) => {
               placeholder="Password"
             />
           </div>
-          <button className="w-full bg-blue-600 mt-2 text-white p-1 rounded hover:bg-blue-950 duration-300">Sing in</button>
+          <button className="w-full bg-blue-600 mt-2 text-white p-1 rounded hover:bg-blue-950 duration-300">
+            Sing in
+          </button>
         </form>
       </div>
     </div>
