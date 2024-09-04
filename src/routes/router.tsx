@@ -3,6 +3,9 @@ import Login from "../pages/auth/Login";
 import SingIn from "../pages/auth/SingIn";
 import HomeLayout from "../layout/HomeLayout";
 import Home from "../pages/Home/Home";
+import EmployerLayout from "../layout/EmployerLayout";
+import EmployerDashboard from "../pages/Dashboard/Employer/EmployerDashboard";
+import CompanyProfile from "../pages/Dashboard/Employer/CompanyProfile";
 
 const router = createBrowserRouter([
   {
@@ -23,5 +26,19 @@ const router = createBrowserRouter([
     path: "/registration",
     element: <SingIn />,
   },
+  {
+    path:'/employ-dashboard',
+    element:<EmployerLayout/>,
+    children:[
+      {
+        path:"dashboard-hero",
+        element:<EmployerDashboard/>
+      },
+      {
+        path:'company-profile',
+        element:<CompanyProfile/>
+      }
+    ]
+  }
 ]);
 export default router;

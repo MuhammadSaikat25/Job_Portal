@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
 type Props = {
   menu: boolean;
   setMenu: (menu: boolean) => void;
@@ -29,6 +30,7 @@ const MobileSideBar = ({ menu, setMenu }: Props) => {
         className="w-fit h-full bg-[#FFFFFF] fixed text-black px-2 py-1 z-[20] top-0 left-0 transition-transform duration-300"
       >
         <h1>Hello Hero</h1>
+        <NavLink to={"dashboard-hero"}>Dashboard</NavLink>
       </div>
     </div>
   );

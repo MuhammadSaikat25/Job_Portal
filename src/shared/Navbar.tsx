@@ -44,12 +44,13 @@ const Navbar = () => {
                   <p>/</p>
                   <button onClick={() => setSingUpModal(true)}>Register</button>
                 </div>
+                <Link to={"employ-dashboard/dashboard-hero"}>Dashboard</Link>
               </div>
             </div>
           </>
         ) : (
           <div className="flex items-center justify-around">
-             <img className="w-[40px]" src={logo} alt="" />
+            <img className="w-[40px]" src={logo} alt="" />
             <div className="flex items-center gap-5">
               <Link to={""}>Home</Link>
               <Link to={""}>Find job</Link>
@@ -60,6 +61,7 @@ const Navbar = () => {
                 <p>/</p>
                 <button onClick={() => setSingUpModal(true)}>Register</button>
               </div>
+              <Link to={"employ-dashboard/dashboard-hero"}>Dashboard</Link>
             </div>
           </div>
         )}
