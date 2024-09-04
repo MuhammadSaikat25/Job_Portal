@@ -4,6 +4,7 @@ import Login from "../pages/auth/Login";
 import SingIn from "../pages/auth/SingIn";
 import MobileSideBar from "./MobileSideBar";
 import { CiMenuBurger } from "react-icons/ci";
+import logo from "../assets/image.png";
 
 const Navbar = () => {
   const [scroll, setScroll] = useState(0);
@@ -32,7 +33,7 @@ const Navbar = () => {
         {scroll >= 80 ? (
           <>
             <div className="flex items-center justify-around">
-              <h1>Home</h1>
+              <img className="w-[40px]" src={logo} alt="" />
               <div className="flex items-center gap-5">
                 <Link to={""}>Home</Link>
                 <Link to={""}>Find job</Link>
@@ -48,7 +49,7 @@ const Navbar = () => {
           </>
         ) : (
           <div className="flex items-center justify-around">
-            <h1>Home</h1>
+             <img className="w-[40px]" src={logo} alt="" />
             <div className="flex items-center gap-5">
               <Link to={""}>Home</Link>
               <Link to={""}>Find job</Link>

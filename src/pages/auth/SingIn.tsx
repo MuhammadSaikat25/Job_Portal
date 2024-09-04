@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { FaUserTie } from "react-icons/fa6";
 import { TiShoppingBag } from "react-icons/ti";
-
+import { IoMdClose, IoMdEyeOff } from "react-icons/io";
+import { IoMdEye } from "react-icons/io";
 type Props = {
   singUpModal?: boolean;
   setSingUpModal?: (singUpModal: boolean) => void;
@@ -13,7 +14,7 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
     email: "",
     password: "",
   });
-
+  const [togglePass, setTogglePass] = useState(false);
   const [userRole, setUserRole] = useState("Employer");
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
             className="absolute top-0 text-gray-950 font-bold cursor-pointer right-1"
             onClick={() => setSingUpModal(false)}
           >
-            X
+            <IoMdClose />
           </span>
         )}
         <h1 className="text-gray-900 font-semibold text-center">
@@ -108,7 +109,7 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
               placeholder="Email"
             />
           </div>
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 relative">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -118,6 +119,12 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
               className="border border-gray-900 p-1 rounded-sm text-gray-950"
               placeholder="Password"
             />
+            <div
+              onClick={() => setTogglePass(!togglePass)}
+              className="cursor-pointer absolute top-11 right-2"
+            >
+              {togglePass ? <IoMdEye /> : <IoMdEyeOff />}
+            </div>
           </div>
           <button className="w-full bg-blue-600 mt-2 text-white p-1 rounded hover:bg-blue-950 duration-300">
             Sign Up
