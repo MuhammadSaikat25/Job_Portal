@@ -27,7 +27,7 @@ const EmployerNav = () => {
         <NavLink to={"/"}>Home</NavLink>
         <NavLink to={"dashboard-hero"}>Dashboard</NavLink>
         <NavLink to={"company-profile"}>Company Profile</NavLink>
-        <NavLink to={""}>Post Job</NavLink>
+        <NavLink to={"post-job"}>Post Job</NavLink>
         <NavLink to={""}>Manage Job</NavLink>
         <NavLink to={""}>All Applicants</NavLink>
         <NavLink to={""}>Shortlisted Resumes</NavLink>

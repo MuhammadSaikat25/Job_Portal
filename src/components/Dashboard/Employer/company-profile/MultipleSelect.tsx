@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSortDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-const MultipleSelect = () => {
+type Props = {
+  aboutCompany: string[];
+  setAboutCompany: (aboutCompany: string[]) => void;
+};
+const MultipleSelect = ({ setAboutCompany }: Props) => {
   const [optionValues, setOptionValues] = useState<string[]>([
     "Banking",
     "IT",
@@ -34,6 +38,9 @@ const MultipleSelect = () => {
     setTextValue((prev) => prev.filter((item) => item !== value));
     setOptionValues((prev) => [...prev, value]);
   };
+  useEffect(() => {
+    setAboutCompany([...textValue]);
+  }, [textValue]);
   return (
     <>
       <div className="relative w-full">

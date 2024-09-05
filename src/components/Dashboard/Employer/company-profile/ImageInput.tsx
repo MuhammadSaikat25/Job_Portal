@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import useAxiosPublic from "../../../../utils/useAxiosPublic";
 import { FadeLoader } from "react-spinners";
-const ImageInput = () => {
+type Props = {
+  companyImage: string;
+  setCompanyImage: (image: string) => void;
+};
+
+const ImageInput = ({ setCompanyImage }: Props) => {
   const [image, setImage] = useState<string | null>(null);
   const axiosPublic = useAxiosPublic();
 
@@ -30,14 +35,14 @@ const ImageInput = () => {
         });
 
         if (postImageRes) {
-          setImage(postImageRes.data.data.url);
+          setCompanyImage(postImageRes.data.data.url);
         }
       } catch (error) {
         console.error("Error uploading image:", error);
       }
     }
   };
-  console.log(image);
+
   return (
     <div className="w-full my-3 ">
       <input

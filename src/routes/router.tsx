@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home";
 import EmployerLayout from "../layout/EmployerLayout";
 import EmployerDashboard from "../pages/Dashboard/Employer/EmployerDashboard";
 import CompanyProfile from "../pages/Dashboard/Employer/CompanyProfile";
+import PostJob from "../pages/Dashboard/Employer/PostJob";
 
 const router = createBrowserRouter([
   {
@@ -27,18 +28,22 @@ const router = createBrowserRouter([
     element: <SingIn />,
   },
   {
-    path:'/employ-dashboard',
-    element:<EmployerLayout/>,
-    children:[
+    path: "/employ-dashboard",
+    element: <EmployerLayout />,
+    children: [
       {
-        path:"dashboard-hero",
-        element:<EmployerDashboard/>
+        path: "dashboard-hero",
+        element: <EmployerDashboard />,
       },
       {
-        path:'company-profile',
-        element:<CompanyProfile/>
-      }
-    ]
-  }
+        path: "company-profile",
+        element: <CompanyProfile />,
+      },
+      {
+        path: "post-job",
+        element: <PostJob />,
+      },
+    ],
+  },
 ]);
 export default router;
