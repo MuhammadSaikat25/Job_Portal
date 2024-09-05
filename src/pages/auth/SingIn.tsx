@@ -3,19 +3,25 @@ import { FaUserTie } from "react-icons/fa6";
 import { TiShoppingBag } from "react-icons/ti";
 import { IoMdClose, IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
+import { useRegistrationMutation } from "../../redux/feature/auth/authApi";
+import { toast, Toaster } from "react-hot-toast";
+
 type Props = {
+  loginModal?: boolean;
+  setLoginModal?: (loginModal: boolean) => void;
   singUpModal?: boolean;
   setSingUpModal?: (singUpModal: boolean) => void;
 };
 
-const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
+const SingIn = ({ singUpModal, setSingUpModal, setLoginModal }: Props) => {
+  const [registration] = useRegistrationMutation();
   const [formInfo, setFormInfo] = useState({
     name: "",
     email: "",
     password: "",
   });
   const [togglePass, setTogglePass] = useState(false);
-  const [userRole, setUserRole] = useState("Employer");
+  const [userRole, setUserRole] = useState("employer");
 
   useEffect(() => {
     if (singUpModal) {
@@ -37,13 +43,35 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+    const role = userRole;
+    const userInfo = {
+      ...formInfo,
+      role,
+    };
+    const res = await registration(userInfo);
+    if (res.error) {
+      if ("data" in res.error) {
+        const err = res.error as any;
+        if (err.data.err.code === 11000) {
+          toast.error("Email already exist");
+        }
+      }
+    }
+    if (res.data.success && setSingUpModal && setLoginModal) {
+      setTimeout(() => {
+        setSingUpModal(false);
+        setLoginModal(true);
+      }, 600);
+
+      toast.success("Register successful ");
+    }
   };
 
   return (
     <div className={`absolute top-0 bg-gray-950 bg-opacity-30 w-full h-screen`}>
+      <Toaster />
       <div className="absolute left-[10%] md:left-[30%] md:top-[10%] lg:left-[35%] top-[20%] lg:top-[25%] bg-white text-black h-fit p-7 rounded-md lg:w-[30%]">
         {setSingUpModal && (
           <span
@@ -59,9 +87,9 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
         {/* --------------------- */}
         <div className="flex items-center gap-x-14 justify-center my-3">
           <div
-            onClick={() => setUserRole("Candidate")}
+            onClick={() => setUserRole("candidate")}
             className={`${
-              userRole === "Candidate" ? "bg-green-600" : "bg-blue-500"
+              userRole === "candidate" ? "bg-green-600" : "bg-blue-500"
             } rounded p-1 text-white`}
           >
             <button className="flex items-center gap-1">
@@ -73,7 +101,7 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
           </div>
           <div
             className={`${
-              userRole === "Employer" ? "bg-green-600" : "bg-blue-500"
+              userRole === "employer" ? "bg-green-600" : "bg-blue-500"
             } rounded p-1 text-white`}
             onClick={() => setUserRole("Employer")}
           >
@@ -96,6 +124,7 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
               onChange={handleChange}
               className="border border-gray-900 p-1 rounded-sm text-gray-950"
               placeholder="Name"
+              required
             />
           </div>
           <div className="flex flex-col gap-y-2 mb-4">
@@ -107,6 +136,7 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
               onChange={handleChange}
               className="border border-gray-900 p-1 rounded-sm text-gray-950"
               placeholder="Email"
+              required
             />
           </div>
           <div className="flex flex-col gap-y-2 relative">
@@ -118,6 +148,7 @@ const SingIn = ({ singUpModal, setSingUpModal }: Props) => {
               onChange={handleChange}
               className="border border-gray-900 p-1 rounded-sm text-gray-950"
               placeholder="Password"
+              required
             />
             <div
               onClick={() => setTogglePass(!togglePass)}

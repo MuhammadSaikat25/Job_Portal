@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdAdd, IoMdClose } from "react-icons/io";
+import { usePostJobMutation } from "../../../../redux/feature/employer/jobApi";
+import { useGetMyCompanyQuery } from "../../../../redux/feature/employer/companyApi";
+import toast, { Toaster } from "react-hot-toast";
 
 const JobPostForm = () => {
-  const [responsibilities, setResponsibilities] = useState([""]);
-  const [skills, setSkills] = useState([""]);
+  const [companyId, setCompanyId] = useState("");
+  const [postJob] = usePostJobMutation();
+  const { data } = useGetMyCompanyQuery(undefined);
+
+  useEffect(() => {
+    setCompanyId(data?.data._id);
+  }, [data]);
+  const [responsibilities, setResponsibilities] = useState<string[]>([""]);
+  const [skills, setSkills] = useState<string[]>([""]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [experience, setExperience] = useState("");
+  const [experience, setExperience] = useState("1-3");
   const [gender, setGender] = useState("");
   const [deadline, setDeadline] = useState("");
   const [jobType, setJobType] = useState("");
@@ -25,7 +35,7 @@ const JobPostForm = () => {
   };
 
   const handleRemoveResponsibility = (index: number) => {
-    if (responsibilities?.length === 1) return;
+    if (responsibilities.length === 1) return;
     const newResponsibilities = responsibilities.filter((_, i) => i !== index);
     setResponsibilities(newResponsibilities);
   };
@@ -41,12 +51,12 @@ const JobPostForm = () => {
   };
 
   const handleRemoveSkill = (index: number) => {
-    if (skills?.length === 1) return;
+    if (skills.length === 1) return;
     const newSkills = skills.filter((_, i) => i !== index);
     setSkills(newSkills);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const jobPostData = {
@@ -61,15 +71,20 @@ const JobPostForm = () => {
       country,
       position,
       salary,
+      company: companyId,
     };
-
-    // You can process this data (send to API, log it, etc.)
-    console.log("Job Post Data:", jobPostData);
-    // Reset form if needed
+    const res = await postJob(jobPostData);
+    if (res.error) {
+      toast.error("Something went wrong");
+    }
+    if (res.data.success === true) {
+      toast.success("job post successful");
+    }
   };
 
   return (
-    <div className="rounded-md py-1">
+    <div className="rounded-md">
+      <Toaster />
       <form className="w-full" onSubmit={handleSubmit}>
         <div className="bg-white p-6 rounded-sm shadow shadow-blue-300">
           {/* Title */}
@@ -82,6 +97,7 @@ const JobPostForm = () => {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              required
             />
           </div>
           {/* Job Description */}
@@ -93,6 +109,7 @@ const JobPostForm = () => {
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              required
             ></textarea>
           </div>
           {/* Key Responsibilities */}
@@ -123,7 +140,7 @@ const JobPostForm = () => {
             ))}
             <button
               type="button"
-              className="flex items-center "
+              className="flex items-center"
               onClick={handleAddResponsibility}
             >
               <IoMdAdd />
@@ -166,99 +183,115 @@ const JobPostForm = () => {
           {/* Experience & Gender */}
           <div className="flex items-center justify-between mt-2 w-full gap-x-2">
             <div className="flex flex-col gap-y-2 w-full">
-              <label htmlFor="Experience">Experience</label>
+              <label htmlFor="experience">Experience</label>
               <select
                 className="w-full bg-stone-300 p-2 rounded-sm"
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}
+                id="experience"
               >
                 <option value="">1-3 Years</option>
-                <option value="">3-7 Years</option>
-                <option value="">7-10 Years</option>
-                <option value="">10+ Years</option>
+                <option value="3-7">3-7 Years</option>
+                <option value="7-10">7-10 Years</option>
+                <option value="10+">10+ Years</option>
               </select>
             </div>
             <div className="flex flex-col gap-y-2 w-full">
-              <label htmlFor="Experience">Gender</label>
+              <label htmlFor="gender">Gender</label>
               <select
                 className="bg-slate-300 p-2 rounded-sm"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
+                id="gender"
+                required
               >
-                <option value="">Male</option>
-                <option value="">Female</option>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
             </div>
           </div>
           {/* Application Deadline & Job Type */}
           <div className="flex items-center justify-between mt-2 w-full gap-x-2">
             <div className="flex flex-col gap-y-2 w-full">
-              <label htmlFor="">Application Deadline</label>
+              <label htmlFor="deadline">Application Deadline</label>
               <input
                 type="date"
+                id="deadline"
                 min={new Date().toISOString().split("T")[0]}
                 className="bg-slate-300 p-2 rounded-sm"
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
+                required
               />
             </div>
             <div className="flex flex-col gap-y-2 w-full">
-              <label htmlFor="Experience">Job Type</label>
+              <label htmlFor="jobType">Job Type</label>
               <select
                 className="bg-slate-300 p-2 rounded-sm"
                 value={jobType}
                 onChange={(e) => setJobType(e.target.value)}
+                id="jobType"
+                required
               >
-                <option value="">Full Time</option>
-                <option value="">Part Time</option>
-                <option value="">Internship</option>
+                <option value="">Select Job Type</option>
+                <option value="Full Time">Full Time</option>
+                <option value="Part Time">Part Time</option>
+                <option value="Internship">Internship</option>
               </select>
             </div>
           </div>
           {/* Country & Job Position */}
           <div className="flex items-center justify-between mt-2 w-full gap-x-2">
             <div className="flex flex-col gap-y-2 w-full">
-              <label htmlFor="">Country</label>
-              <input
-                type="text"
-                className="bg-slate-300 p-2 rounded-sm"
-                placeholder="Country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col gap-y-2 w-full">
-              <label htmlFor="Experience">Job Position</label>
+              <label htmlFor="country">Country</label>
               <select
                 className="bg-slate-300 p-2 rounded-sm"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                id="country"
+                required
+              >
+                <option value="">Select Country</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-y-2 w-full">
+              <label htmlFor="position">Job Position</label>
+              <input
+                type="text"
+                id="position"
+                className="bg-slate-300 p-2 rounded-sm"
+                placeholder="Job Position"
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
-              >
-                <option value="">Remote</option>
-                <option value="">On location</option>
-              </select>
+                required
+              />
             </div>
           </div>
           {/* Salary */}
-          <div className="flex flex-col gap-y-2 w-full mt-4">
-            <label htmlFor="Salary">Salary</label>
+          <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
+            <label htmlFor="salary">Salary</label>
             <input
-              type="text"
-              className="w-full bg-slate-300 p-2 rounded-sm"
+              type="number"
+              id="salary"
+              className="bg-slate-300 p-2 rounded-sm"
               placeholder="Salary"
               value={salary}
               onChange={(e) => setSalary(e.target.value)}
+              required
             />
           </div>
           {/* Submit Button */}
-          <div className="flex items-end justify-end mt-2">
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-sm"
-            >
-              Submit
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="mt-4 w-full py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600"
+          >
+            Post Job
+          </button>
         </div>
       </form>
     </div>

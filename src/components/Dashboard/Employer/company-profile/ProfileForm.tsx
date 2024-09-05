@@ -1,15 +1,18 @@
 import { useState } from "react";
 import ImageInput from "./ImageInput";
 import MultipleSelect from "./MultipleSelect";
-import { useCreateCompanyMutation } from "../../../../redux/feature/employer/employerApi";
+import { useCreateCompanyMutation } from "../../../../redux/feature/employer/companyApi";
 import toast, { Toaster } from "react-hot-toast";
+import { useAppSelector } from "../../../../redux/hooks";
+import { RootState } from "../../../../redux/store";
 
 const ProfileForm = () => {
+  const user = useAppSelector((state: RootState) => state.auth.user);
   const [createCompany, { isLoading }] = useCreateCompanyMutation();
   const [aboutCompany, setAboutCompany] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     companyName: "",
-    email: "",
+    email: user?.email,
     phone: "",
     website: "",
     teamSize: "50-100",
@@ -43,27 +46,31 @@ const ProfileForm = () => {
 
     if (res.error) {
       const error = res.error as any;
-      if (error.data) {
+      if (error.data && error.data.statusCode !== 401) {
         const errPath = error.data.errorSources;
-        toast.error(errPath.map((err: any) => err.message));
+        toast.error(errPath?.map((err: any) => err.message));
+      }
+      if (error.data.statusCode === 401) {
+        toast.error(error.data.message);
       }
     }
     if (!res.error) {
       toast.success("Company create successful");
+      setFormData({
+        companyName: "",
+        email: "",
+        phone: "",
+        website: "",
+        teamSize: "50-100",
+        aboutCompany: "",
+        CompanyDescription: "",
+        country: "",
+        city: "",
+        address: "",
+      });
+      setAboutCompany([""]);
+      setCompanyImage("");
     }
-    setFormData({
-      companyName: "",
-      email: "",
-      phone: "",
-      website: "",
-      teamSize: "50-100",
-      aboutCompany: "",
-      CompanyDescription: "",
-      country: "",
-      city: "",
-      address: "",
-    });
-    setAboutCompany([""]);
   };
 
   return (
@@ -94,9 +101,9 @@ const ProfileForm = () => {
               <input
                 type="email"
                 name="email"
-                value={formData.email}
-                onChange={handleInputChange}
+                value={user!.email}
                 placeholder="Email"
+                readOnly
                 className="w-full p-1 rounded-sm bg-[#CBD5E1]"
               />
             </div>

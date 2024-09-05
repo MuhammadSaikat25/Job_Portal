@@ -72,7 +72,7 @@ const Navbar = () => {
           <Login loginModal={loginModal} setLoginModal={setLoginModal} />
         )}
         {singUpModal && (
-          <SingIn singUpModal={singUpModal} setSingUpModal={setSingUpModal} />
+          <SingIn loginModal={loginModal} setLoginModal={setLoginModal} singUpModal={singUpModal}  setSingUpModal={setSingUpModal} />
         )}
       </div>
       {/* ---------------------------- small navbar --------------------- */}
