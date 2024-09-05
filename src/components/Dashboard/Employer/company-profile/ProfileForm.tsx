@@ -1,17 +1,20 @@
 import { useState } from "react";
 import ImageInput from "./ImageInput";
 import MultipleSelect from "./MultipleSelect";
+import { useCreateCompanyMutation } from "../../../../redux/feature/employer/employerApi";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProfileForm = () => {
+  const [createCompany, { isLoading }] = useCreateCompanyMutation();
   const [aboutCompany, setAboutCompany] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     companyName: "",
     email: "",
     phone: "",
     website: "",
-    teamSize: "",
+    teamSize: "50-100",
     aboutCompany: "",
-    aboutCompanyText: "",
+    CompanyDescription: "",
     country: "",
     city: "",
     address: "",
@@ -29,18 +32,43 @@ const ProfileForm = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const obj = {
+    const companyData = {
       ...formData,
       image: companyImage,
       aboutCompany: [...aboutCompany],
     };
-    console.log(obj);
+    const res = await createCompany(companyData);
+
+    if (res.error) {
+      const error = res.error as any;
+      if (error.data) {
+        const errPath = error.data.errorSources;
+        toast.error(errPath.map((err: any) => err.message));
+      }
+    }
+    if (!res.error) {
+      toast.success("Company create successful");
+    }
+    setFormData({
+      companyName: "",
+      email: "",
+      phone: "",
+      website: "",
+      teamSize: "50-100",
+      aboutCompany: "",
+      CompanyDescription: "",
+      country: "",
+      city: "",
+      address: "",
+    });
+    setAboutCompany([""]);
   };
 
   return (
-    <div className="rounded-md py-1">
+    <div className="rounded-md py-10 ">
+      <Toaster />
       <form className="w-full" onSubmit={handleSubmit}>
         <div className="bg-white p-6 rounded-sm shadow shadow-blue-300">
           <ImageInput
@@ -129,8 +157,8 @@ const ProfileForm = () => {
           <div className="flex flex-col items-start gap-y-2 w-full">
             <label htmlFor="aboutCompanyText">About Company</label>
             <textarea
-              name="aboutCompanyText"
-              value={formData.aboutCompanyText}
+              name="CompanyDescription"
+              value={formData.CompanyDescription}
               onChange={handleInputChange}
               className="w-full p-1 rounded-sm bg-[#CBD5E1]"
               placeholder="About Company ...."
@@ -178,12 +206,16 @@ const ProfileForm = () => {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="mt-4 p-2 bg-blue-500 text-white rounded-md"
-        >
-          Submit
-        </button>
+        {isLoading ? (
+          <p>loading ...</p>
+        ) : (
+          <button
+            type="submit"
+            className="mt-4 p-2 bg-blue-700 w-full text-white rounded"
+          >
+            Submit
+          </button>
+        )}
       </form>
     </div>
   );
