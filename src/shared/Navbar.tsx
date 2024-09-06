@@ -5,6 +5,8 @@ import SingIn from "../pages/auth/SingIn";
 import MobileSideBar from "./MobileSideBar";
 import { CiMenuBurger } from "react-icons/ci";
 import logo from "../assets/image.png";
+import { useAppSelector } from "../redux/hooks";
+import { RootState } from "../redux/store";
 
 const Navbar = () => {
   const [scroll, setScroll] = useState(0);
@@ -22,6 +24,7 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const user = useAppSelector((state: RootState) => state.auth.user);
 
   return (
     <nav className="">
@@ -61,7 +64,13 @@ const Navbar = () => {
                 <p>/</p>
                 <button onClick={() => setSingUpModal(true)}>Register</button>
               </div>
-              <Link to={"employ-dashboard/dashboard-hero"}>Dashboard</Link>
+              {user?.role === "employer" && (
+                <Link to={"employ-dashboard/dashboard-hero"}>Dashboard</Link>
+              )}
+              {user?.role === "candidate" && (
+                <Link to={"/candidate/dashboard/myProfile"}>Dashboard</Link>
+              )}
+              {user?.role === "admin" && <p>hello</p>}
             </div>
           </div>
         )}
@@ -72,7 +81,12 @@ const Navbar = () => {
           <Login loginModal={loginModal} setLoginModal={setLoginModal} />
         )}
         {singUpModal && (
-          <SingIn loginModal={loginModal} setLoginModal={setLoginModal} singUpModal={singUpModal}  setSingUpModal={setSingUpModal} />
+          <SingIn
+            loginModal={loginModal}
+            setLoginModal={setLoginModal}
+            singUpModal={singUpModal}
+            setSingUpModal={setSingUpModal}
+          />
         )}
       </div>
       {/* ---------------------------- small navbar --------------------- */}

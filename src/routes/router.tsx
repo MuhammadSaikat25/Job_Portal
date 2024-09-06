@@ -7,6 +7,9 @@ import EmployerLayout from "../layout/EmployerLayout";
 import EmployerDashboard from "../pages/Dashboard/Employer/EmployerDashboard";
 import CompanyProfile from "../pages/Dashboard/Employer/CompanyProfile";
 import PostJob from "../pages/Dashboard/Employer/PostJob";
+import CandidateLayout from "../layout/CandidateLayout";
+import CandidateProfile from "../pages/Dashboard/candidate/Candidate-Profile/CandidateProfile";
+
 
 const router = createBrowserRouter([
   {
@@ -45,5 +48,15 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:"/candidate/dashboard",
+    element:<CandidateLayout/>,
+    children:[
+      {
+        path:"myProfile",
+        element:<CandidateProfile/>
+      }
+    ]
+  }
 ]);
 export default router;

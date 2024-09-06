@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/icon.png";
 import { CiMenuBurger } from "react-icons/ci";
 
-const EmployerNav = () => {
+const CandidateNav = () => {
   const [menu, setMenu] = useState(false);
   const sidebarRef = useRef<HTMLDivElement | null>(null);
 
@@ -25,12 +25,7 @@ const EmployerNav = () => {
     <nav className="">
       <div className="w-fit bg-red-600 lg:flex flex-col min-h-screen p-2 gap-y-5 hidden">
         <NavLink to={"/"}>Home</NavLink>
-        <NavLink to={"dashboard-hero"}>Dashboard</NavLink>
-        <NavLink to={"company-profile"}>Company Profile</NavLink>
-        <NavLink to={"post-job"}>Post Job</NavLink>
-        <NavLink to={""}>Manage Job</NavLink>
-        <NavLink to={""}>All Applicants</NavLink>
-        <NavLink to={""}>Shortlisted Resumes</NavLink>
+       <NavLink to={'/candidate/dashboard/myProfile'}>My Profile</NavLink>
         <NavLink to={""}>Change Password</NavLink>
         <NavLink to={""}>Logout</NavLink>
       </div>
@@ -75,4 +70,4 @@ const EmployerNav = () => {
   );
 };
 
-export default EmployerNav;
+export default CandidateNav;

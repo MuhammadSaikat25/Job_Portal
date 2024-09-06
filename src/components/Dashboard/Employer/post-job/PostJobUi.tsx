@@ -5,14 +5,14 @@ import check from "../../../../assets/check.png";
 
 const PostJobUi = () => {
   return (
-    <div className="w-[90%] mx-auto py-2">
+    <div className="lg:w-[90%] mx-auto py-2">
       <h1 className="text-2xl text-gray-950 font-semibold my-3">
         Post a New Job!
       </h1>
-      <div className="flex items-center gap-x-4 justify-around bg-[#FFFFFF] shadow shadow-blue-300 py-6">
+      <div className="flex flex-wrap items-center gap-x-4 justify-around bg-[#FFFFFF] shadow shadow-blue-300 py-6">
         <div className="flex items-center gap-x-2">
           <img
-            className="w-[100px] h-[100px] bg-blue-200 p-2 rounded-full"
+            className="w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] bg-blue-200 p-2 rounded-full"
             src={bg}
             alt=""
           />
@@ -21,7 +21,7 @@ const PostJobUi = () => {
         </div>
         <div className="flex items-center gap-x-2">
           <img
-            className="w-[100px] h-[100px] bg-blue-200 p-2 rounded-full"
+            className="w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] bg-blue-200 p-2 rounded-full"
             src={money}
             alt=""
           />
@@ -29,7 +29,7 @@ const PostJobUi = () => {
         </div>
         <div className="flex items-center gap-x-2">
           <img
-            className="w-[100px] h-[100px] bg-blue-200 p-2 rounded-full"
+            className="w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] bg-blue-200 p-2 rounded-full"
             src={check}
             alt=""
           />
