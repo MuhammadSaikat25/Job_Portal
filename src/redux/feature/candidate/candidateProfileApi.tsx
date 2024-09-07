@@ -9,7 +9,13 @@ const candidateProfileApi = baseApi.injectEndpoints({
         body: profileData,
       }),
     }),
+    getCandidateProfile: builder.query({
+      query: () => ({
+        url: "/candidate-profile",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateCandidateProfileMutation } = candidateProfileApi;
+export const { useCreateCandidateProfileMutation,useGetCandidateProfileQuery } = candidateProfileApi;

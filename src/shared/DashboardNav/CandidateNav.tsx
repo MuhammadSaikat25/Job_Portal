@@ -25,7 +25,10 @@ const CandidateNav = () => {
     <nav className="">
       <div className="w-fit bg-red-600 lg:flex flex-col min-h-screen p-2 gap-y-5 hidden">
         <NavLink to={"/"}>Home</NavLink>
-       <NavLink to={'/candidate/dashboard/myProfile'}>My Profile</NavLink>
+        <NavLink to={"/candidate/dashboard/myProfile"}>My Profile</NavLink>
+        <NavLink to={"/candidate/dashboard/candidate-resume"}>
+          My Resume
+        </NavLink>
         <NavLink to={""}>Change Password</NavLink>
         <NavLink to={""}>Logout</NavLink>
       </div>

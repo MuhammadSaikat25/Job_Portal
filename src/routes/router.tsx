@@ -9,6 +9,7 @@ import CompanyProfile from "../pages/Dashboard/Employer/CompanyProfile";
 import PostJob from "../pages/Dashboard/Employer/PostJob";
 import CandidateLayout from "../layout/CandidateLayout";
 import CandidateProfile from "../pages/Dashboard/candidate/Candidate-Profile/CandidateProfile";
+import CandidateResume from "../pages/Dashboard/candidate/candidate-resume/CandidateResume";
 
 
 const router = createBrowserRouter([
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path:"myProfile",
         element:<CandidateProfile/>
+      },
+      {
+        path:"candidate-resume",
+        element:<CandidateResume/>
       }
     ]
   }
