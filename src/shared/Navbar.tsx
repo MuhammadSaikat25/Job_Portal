@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Login from "../pages/auth/Login";
 import SingIn from "../pages/auth/SingIn";
@@ -13,7 +13,8 @@ const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [singUpModal, setSingUpModal] = useState(false);
   const [menu, setMenu] = useState(false);
-
+  const location=useLocation()
+  
   const handleScroll = () => {
     setScroll(window.scrollY);
   };
@@ -29,8 +30,8 @@ const Navbar = () => {
   return (
     <nav className="">
       <div
-        className={`hidden lg:block fixed top-0 w-full text-white transition-all duration-500  ${
-          scroll >= 80 ? "lg:bg-[#22218C] py-4" : "bg-transparent py-5"
+        className={`hidden lg:block fixed top-0 w-full text-white ${location.pathname==='/' ? "transition-all duration-500":""}  ${
+          scroll >= 80 ? "lg:bg-[#22218C] py-4" : `${location?.pathname==="/"?"bg-transparent":"bg-[#22218C]"} py-5`
         }`}
       >
         {scroll >= 80 ? (
@@ -38,10 +39,10 @@ const Navbar = () => {
             <div className="flex items-center justify-around">
               <img className="w-[40px]" src={logo} alt="" />
               <div className="flex items-center gap-5">
-                <Link to={""}>Home</Link>
-                <Link to={""}>Find job</Link>
-                <Link to={""}>Employers</Link>
-                <Link to={""}>Candidate</Link>
+              <Link to={""}>Home</Link>
+              <Link to={"/jobs"}>Find job</Link>
+              <Link to={""}>Employers</Link>
+              <Link to={""}>Candidate</Link>
                 <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
                   <button onClick={() => setLoginModal(true)}>Login</button>
                   <p>/</p>
@@ -56,7 +57,7 @@ const Navbar = () => {
             <img className="w-[40px]" src={logo} alt="" />
             <div className="flex items-center gap-5">
               <Link to={""}>Home</Link>
-              <Link to={""}>Find job</Link>
+              <Link to={"/jobs"}>Find job</Link>
               <Link to={""}>Employers</Link>
               <Link to={""}>Candidate</Link>
               <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">

@@ -10,7 +10,7 @@ import PostJob from "../pages/Dashboard/Employer/PostJob";
 import CandidateLayout from "../layout/CandidateLayout";
 import CandidateProfile from "../pages/Dashboard/candidate/Candidate-Profile/CandidateProfile";
 import CandidateResume from "../pages/Dashboard/candidate/candidate-resume/CandidateResume";
-
+import Jobs from "../pages/Jobs/Jobs";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/jobs",
+        element: <Jobs />,
       },
     ],
   },
@@ -50,18 +54,18 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:"/candidate/dashboard",
-    element:<CandidateLayout/>,
-    children:[
+    path: "/candidate/dashboard",
+    element: <CandidateLayout />,
+    children: [
       {
-        path:"myProfile",
-        element:<CandidateProfile/>
+        path: "myProfile",
+        element: <CandidateProfile />,
       },
       {
-        path:"candidate-resume",
-        element:<CandidateResume/>
-      }
-    ]
-  }
+        path: "candidate-resume",
+        element: <CandidateResume />,
+      },
+    ],
+  },
 ]);
 export default router;

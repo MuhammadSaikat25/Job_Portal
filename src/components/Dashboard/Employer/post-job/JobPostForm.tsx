@@ -22,7 +22,7 @@ const JobPostForm = () => {
   const [jobType, setJobType] = useState("");
   const [country, setCountry] = useState("");
   const [position, setPosition] = useState("");
-  const [salary, setSalary] = useState("");
+  const [salary, setSalary] = useState<number>();
 
   const handleAddResponsibility = () => {
     setResponsibilities([...responsibilities, ""]);
@@ -73,10 +73,13 @@ const JobPostForm = () => {
       salary,
       company: companyId,
     };
+
     const res = await postJob(jobPostData);
+
     if (res.error) {
       toast.error("Something went wrong");
     }
+    
     if (res.data.success === true) {
       toast.success("job post successful");
     }
@@ -208,6 +211,7 @@ const JobPostForm = () => {
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
+                <option value="Both">Both</option>
               </select>
             </div>
           </div>
@@ -261,15 +265,18 @@ const JobPostForm = () => {
             </div>
             <div className="flex flex-col gap-y-2 w-full">
               <label htmlFor="position">Job Position</label>
-              <input
-                type="text"
-                id="position"
-                className="bg-slate-300 p-2 rounded-sm"
-                placeholder="Job Position"
+              <select
+                name=""
+                id=""
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
                 required
-              />
+                className="bg-slate-300 p-2 rounded-sm"
+              >
+                <option value="Remote">Remote</option>
+                <option value="On Side">On Side</option>
+                <option value="Hybrid">Hybrid</option>
+              </select>
             </div>
           </div>
           {/* Salary */}
@@ -281,7 +288,7 @@ const JobPostForm = () => {
               className="bg-slate-300 p-2 rounded-sm"
               placeholder="Salary"
               value={salary}
-              onChange={(e) => setSalary(e.target.value)}
+              onChange={(e) => setSalary(Number(e.target.value))}
               required
             />
           </div>
