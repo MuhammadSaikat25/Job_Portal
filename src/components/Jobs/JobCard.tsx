@@ -3,12 +3,15 @@ import exp from "../../assets/exp.jpg";
 import { FaLocationPin } from "react-icons/fa6";
 import { format } from "timeago.js";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
-
+import { Link } from "react-router-dom";
 
 const JobCard = ({ job }: { job: any }) => {
   return (
-    <div className="w-[100%] border rounded border-gray-400 p-4">
-      <div className="my-3 flex items-start gap-x-4 ">
+    <Link
+      to={`/job-details/${job._id}`}
+      className="w-full border rounded border-gray-400 p-4"
+    >
+      <div className="my-3 flex items-start gap-x-4 w-full">
         <div className="flex mt-1 items-center gap-x-3">
           <img className="w-[70px] h-[50px] " src={job.company.image} alt="" />
         </div>
@@ -45,7 +48,7 @@ const JobCard = ({ job }: { job: any }) => {
       <section className="flex items-center gap-x-2">
         <h1>{format(job.company.updatedAt)}</h1>
       </section>
-    </div>
+    </Link>
   );
 };
 

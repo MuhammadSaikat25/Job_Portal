@@ -14,17 +14,20 @@ const JobsUi = () => {
   });
   const { data, isLoading } = useGetALlJObQuery(jobDetails!);
   const [modal, setModal] = useState(false);
+
   useEffect(() => {
     setJobs(data?.data);
   }, [data]);
+
   const handleOverlayClick = () => {
     setModal(false);
   };
-  console.log(isLoading)
+
   return (
-    <div className="mt-[80px] p-4 relative" onClick={() => setModal(!modal)}>
+    <div className="mt-[80px] p-4 relative lg:w-[95%] mx-auto">
       {!isLoading ? (
-        <div className="">
+        <div>
+          {/* Filter Button */}
           <div
             onClick={() => setModal(!modal)}
             className="flex items-center gap-x-3 bg-[#EFF4FC] px-5 py-2 w-fit rounded-md cursor-pointer"
@@ -32,19 +35,24 @@ const JobsUi = () => {
             <IoFilterSharp className="text-blue-700" />
             <span className="text-blue-700">Filter</span>
           </div>
-          <div className="py-3 grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+          {/* Job Listings */}
+          <div className="py-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
             {jobs?.map((job: any) => (
               <JobCard key={job._id} job={job} />
             ))}
           </div>
+
+          {/* Modal Overlay */}
           {modal && (
             <div
-              className="bg-gray-950 fixed top-0 left-0 w-full bg-opacity-40 h-full "
+              className="bg-gray-950 fixed top-0 left-0 w-full bg-opacity-40 h-full"
               onClick={handleOverlayClick}
             >
+              {/* Modal Content */}
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="bg-[#F5F7FC]  w-fit px-10 py-12 lg:py-24 h-full border-r border-gray-600"
+                className="bg-[#F5F7FC] w-fit px-10 py-12 lg:py-24 h-full border-r border-gray-600"
               >
                 <JobsNav
                   jobDetails={jobDetails}

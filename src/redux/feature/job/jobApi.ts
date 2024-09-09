@@ -4,12 +4,11 @@ const JobApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getALlJOb: builder.query({
       query: ({ jobType, jobPosition, experience, salary }) => {
-        // Construct the query string
         const queryString = new URLSearchParams({
           jobType,
           jobPosition,
           experience,
-          salary: salary.join(",") 
+          salary: salary.join(","),
         }).toString();
 
         return {
@@ -17,7 +16,14 @@ const JobApi = baseApi.injectEndpoints({
         };
       },
     }),
+    singleJob:builder.query({
+      query:(id)=>{
+        return{
+          url:`job-details/${id}`
+        }
+      }
+    })
   }),
 });
 
-export const { useGetALlJObQuery } = JobApi;
+export const { useGetALlJObQuery,useSingleJobQuery } = JobApi;

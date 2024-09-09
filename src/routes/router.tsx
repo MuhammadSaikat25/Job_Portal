@@ -11,6 +11,8 @@ import CandidateLayout from "../layout/CandidateLayout";
 import CandidateProfile from "../pages/Dashboard/candidate/Candidate-Profile/CandidateProfile";
 import CandidateResume from "../pages/Dashboard/candidate/candidate-resume/CandidateResume";
 import Jobs from "../pages/Jobs/Jobs";
+import JobDetails from "../pages/Job-details/JobDetails";
+
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/jobs",
         element: <Jobs />,
+      },
+      {
+        path: "/job-details/:id",
+        element: <JobDetails />,
       },
     ],
   },

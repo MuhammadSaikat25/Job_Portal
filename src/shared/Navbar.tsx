@@ -92,7 +92,7 @@ const Navbar = () => {
       </div>
       {/* ---------------------------- small navbar --------------------- */}
       <div className="bg-[#22218C] lg:hidden">
-        <div className="flex items-center p-2 justify-between text-white">
+        <div className="flex items-center p-4 justify-between text-white">
           <h1>Home</h1>
           <div className="flex items-center gap-x-2">
             <div className="flex items-center gap-2 border border-white text-[10px] px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
