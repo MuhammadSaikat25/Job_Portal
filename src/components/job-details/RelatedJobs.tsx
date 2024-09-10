@@ -5,6 +5,7 @@ import exp from "../../assets/exp.jpg";
 const RelatedJobs = ({ jobs }: { jobs: any }) => {
   return (
     <div className="py-3">
+      <p className="py-4 text-gray-800 text-2xl">Related Jobs</p>
       {jobs?.map((job: any) => (
         <div
           key={job._id}

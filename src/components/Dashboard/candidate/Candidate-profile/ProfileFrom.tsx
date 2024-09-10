@@ -2,15 +2,20 @@ import { useState } from "react";
 import MyProfile from "./MyProfile";
 import { useCreateCandidateProfileMutation } from "../../../../redux/feature/candidate/candidateProfileApi";
 import { toast, Toaster } from "react-hot-toast";
+import { useAppSelector } from "../../../../redux/hooks";
+import { RootState } from "../../../../redux/store";
 
 const ProfileForm = () => {
+  const user = useAppSelector((state: RootState) => state.auth.user);
   const [createCandidateProfile] = useCreateCandidateProfileMutation();
   const [candidateImage, setCandidateImage] = useState("");
+ 
   const [formData, setFormData] = useState({
     name: "",
+    image: candidateImage,
     jobTitle: "",
     phone: "",
-    email: "",
+    email: user?.email,
     currentSalary: "",
     expectedSalary: "",
     experience: "",
@@ -19,10 +24,14 @@ const ProfileForm = () => {
     city: "",
     address: "",
   });
-
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await createCandidateProfile(formData);
+    const res = await createCandidateProfile({
+      ...formData,
+      image: candidateImage,
+    });
+    console.log({ ...formData, image: candidateImage });
     if (res.data) {
       toast.success("Candidate profile Create successful");
     }
@@ -85,9 +94,9 @@ const ProfileForm = () => {
             name="email"
             placeholder="Email"
             type="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={user!.email}
             className="bg-stone-200 border border-gray-500 p-2 rounded-sm lg:w-[50%]"
+            readOnly
           />
         </div>
 

@@ -11,7 +11,7 @@ const resumeApi = baseApi.injectEndpoints({
     }),
     getMyResume: builder.query({
       query: () => ({
-        url: "/create-resume",
+        url: "/get-resume",
         method:"GET"
       }),
     }),

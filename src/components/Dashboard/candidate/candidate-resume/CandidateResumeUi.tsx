@@ -5,19 +5,25 @@ import WorkExperience from "./WorkExperience/WorkExperience";
 import { useGetCandidateProfileQuery } from "../../../../redux/feature/candidate/candidateProfileApi";
 import { useAppSelector } from "../../../../redux/hooks";
 import { RootState } from "../../../../redux/store";
-import { useCreateResumeMutation } from "../../../../redux/feature/candidate/resumeApi";
+import {
+  useCreateResumeMutation,
+  useGetMyResumeQuery,
+} from "../../../../redux/feature/candidate/resumeApi";
 import { toast, Toaster } from "react-hot-toast";
 import Skill from "./skill/Skill";
 
 const CandidateResumeUi = () => {
   const user = useAppSelector((state: RootState) => state.auth.user);
   const { data } = useGetCandidateProfileQuery(undefined);
+  const { data: MyResume } = useGetMyResumeQuery(undefined);
+
   const [createResume] = useCreateResumeMutation();
   const [description, setDescription] = useState("");
   const [education, setEducation] = useState<any>([]);
   const [works, setWorks] = useState<any>([]);
   const [project, setProject] = useState<any>([]);
-  const [skill,setSkill]=useState<any>([])
+  const [skill, setSkill] = useState<any>([]);
+
   const resume = {
     email: user?.email,
     candidateProfile: data?.data?._id,
@@ -25,7 +31,7 @@ const CandidateResumeUi = () => {
     works: [...works],
     project: [...project],
     description,
-    skill
+    skill,
   };
 
   const handelResume = async () => {
@@ -42,7 +48,6 @@ const CandidateResumeUi = () => {
       toast.success("Resume create successful");
     }
   };
- 
 
   return (
     <div className="bg-[#e7e9ee] lg:p-10 h-full pt-20 px-1">
@@ -51,6 +56,7 @@ const CandidateResumeUi = () => {
         <textarea
           name=""
           id=""
+          value={MyResume?.data.description || ""}
           className="bg-[#F0F5F7] w-full p-2 rounded-md"
           placeholder="Description"
           onChange={(e) => setDescription(e.target.value)}
@@ -59,7 +65,7 @@ const CandidateResumeUi = () => {
         <WorkExperience works={works} setWorks={setWorks} />
         <Projects setProject={setProject} project={project} />
         <h1>Skill</h1>
-        <Skill setSkill={setSkill} skill={skill}/>
+        <Skill setSkill={setSkill} skill={skill} />
         <button
           onClick={handelResume}
           className="bg-blue-950 w-full p-1 rounded-sm text-white mt-3"

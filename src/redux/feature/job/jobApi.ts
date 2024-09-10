@@ -22,8 +22,24 @@ const JobApi = baseApi.injectEndpoints({
           url:`job-details/${id}`
         }
       }
+    }),
+    appliedJob:builder.mutation({
+      query:(data)=>{
+        return{
+          url:"/applied-job",
+          method:"POST",
+          body:data
+        }
+      }
+    }),
+    amIApplied:builder.query({
+      query:(id)=>{
+        return{
+          url:`/get-applied-job/${id}`
+        }
+      }
     })
   }),
 });
 
-export const { useGetALlJObQuery,useSingleJobQuery } = JobApi;
+export const { useGetALlJObQuery,useSingleJobQuery,useAppliedJobMutation,useAmIAppliedQuery } = JobApi;
