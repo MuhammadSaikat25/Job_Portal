@@ -56,7 +56,7 @@ const CandidateResumeUi = () => {
         <textarea
           name=""
           id=""
-          value={MyResume?.data.description || ""}
+          value={MyResume?.data?.description}
           className="bg-[#F0F5F7] w-full p-2 rounded-md"
           placeholder="Description"
           onChange={(e) => setDescription(e.target.value)}

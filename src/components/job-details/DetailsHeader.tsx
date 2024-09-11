@@ -13,7 +13,8 @@ import {
 
 const DetailsHeader = ({ job }: { job: any }) => {
   const user = useAppSelector((state: RootState) => state.auth.user);
-  const { data } = useGetMyResumeQuery(undefined, { skip: !user });
+  console.log(user)
+  const { data } = useGetMyResumeQuery(undefined);
   const navigate = useNavigate();
   const [appliedJob] = useAppliedJobMutation();
 
@@ -41,7 +42,7 @@ const DetailsHeader = ({ job }: { job: any }) => {
       toast.success("Successfully Applied");
     }
   };
-
+  
   return (
     <div>
       <Toaster />
@@ -89,7 +90,7 @@ const DetailsHeader = ({ job }: { job: any }) => {
           </div>
         </div>
         <div className="text-gray-200 bg-blue-800 p-2 rounded-md hover:bg-red-700 duration-500">
-          {isApplied?.data ? (
+          {isApplied?.data.length ? (
             "Already Applied"
           ) : (
             <button onClick={handelApply}>Apply For Job</button>

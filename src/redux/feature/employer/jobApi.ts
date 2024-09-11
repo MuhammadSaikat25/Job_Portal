@@ -9,7 +9,21 @@ const JobApi = baseApi.injectEndpoints({
         body: jobData,
       }),
     }),
+    getAllApplicants:builder.query({
+      query:()=>{
+        return{
+          url:"/get-allApplicants"
+        }
+      }
+    }),
+    employerAllJob:builder.query({
+      query:()=>{
+        return{
+          url :"/get-companyAllJob"
+        }
+      }
+    })
   }),
 });
 
-export const { usePostJobMutation } = JobApi;
+export const { usePostJobMutation ,useGetAllApplicantsQuery,useEmployerAllJobQuery} = JobApi;

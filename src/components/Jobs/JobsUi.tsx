@@ -18,7 +18,7 @@ const JobsUi = () => {
   useEffect(() => {
     setJobs(data?.data);
   }, [data]);
-
+  console.log(jobs)
   const handleOverlayClick = () => {
     setModal(false);
   };

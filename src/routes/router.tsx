@@ -12,6 +12,7 @@ import CandidateProfile from "../pages/Dashboard/candidate/Candidate-Profile/Can
 import CandidateResume from "../pages/Dashboard/candidate/candidate-resume/CandidateResume";
 import Jobs from "../pages/Jobs/Jobs";
 import JobDetails from "../pages/Job-details/JobDetails";
+import AllApplicants from "../pages/Dashboard/Employer/AllApplicants";
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
         path: "post-job",
         element: <PostJob />,
       },
+      {
+        path:"all-applicants",
+        element:<AllApplicants/>
+      }
     ],
   },
   {
