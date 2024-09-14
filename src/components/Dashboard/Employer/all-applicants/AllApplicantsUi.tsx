@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import {
+  useApprovedApplicationMutation,
   useEmployerAllJobQuery,
   useGetAllApplicantsQuery,
+  useRejectApplicationMutation,
 } from "../../../../redux/feature/employer/jobApi";
 import { CiLocationOff } from "react-icons/ci";
 import { BiDollar } from "react-icons/bi";
@@ -9,16 +11,21 @@ import { IoIosEye } from "react-icons/io";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoCheckmark } from "react-icons/io5";
 import ApplicantResume from "./resume/ApplicantResume";
+import { toast, Toaster } from "react-hot-toast";
 
 const AllApplicantsUi = () => {
   const [resumeModal, setResumeModal] = useState(false);
   const [selectedResume, setSelectedResume] = useState<any>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-
+  const [approvedApplication] = useApprovedApplicationMutation();
+  const [rejectApplication] = useRejectApplicationMutation();
   const { data: allJob, isLoading: isJobsLoading } =
     useEmployerAllJobQuery(undefined);
-  const { data: allAppliedJob, isLoading: isApplicantsLoading } =
-    useGetAllApplicantsQuery(undefined);
+  const {
+    data: allAppliedJob,
+    isLoading: isApplicantsLoading,
+    refetch,
+  } = useGetAllApplicantsQuery(undefined);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -52,6 +59,7 @@ const AllApplicantsUi = () => {
     if (job) {
       if (!jobsWithApplicants[job._id]) {
         jobsWithApplicants[job._id] = {
+          jobId: appliedJob._id,
           jobTitle: job?.title || "Job Title Not Available",
           applicants: [],
         };
@@ -59,6 +67,8 @@ const AllApplicantsUi = () => {
       jobsWithApplicants[job._id].applicants.push({
         user: appliedJob.user || "Applicant Name Not Available",
         resume: appliedJob.resume,
+        applicationStatus: appliedJob.applicationStatus,
+        applicationId: appliedJob._id,
       });
     }
   });
@@ -69,9 +79,24 @@ const AllApplicantsUi = () => {
     setSelectedResume(resume);
     setResumeModal(true);
   };
+  const handelApproved = async (id: string) => {
+    const res = await approvedApplication(id);
+    if (res.data) {
+      toast.success("Application Approved");
+    }
+    refetch();
+  };
+  const handelRejected = async (id: string) => {
+    const res = await rejectApplication(id);
+    if (res.data) {
+      toast.error("Application Rejected");
+    }
+    refetch();
+  };
 
   return (
     <div className="bg-[#d7d9de] min-h-full pb-10">
+      <Toaster />
       <h2 className="text-xl text-gray-900 font-sans py-20 lg:p-4">
         All Applicants!
       </h2>
@@ -87,9 +112,14 @@ const AllApplicantsUi = () => {
                 {job.applicants.map((applicant: any, i: number) => (
                   <div
                     key={i}
-                    className="border border-gray-300 p-5 rounded-sm w-full lg:w-[70%]"
+                    className="border border-gray-300 p-5 rounded-sm w-full relative lg:w-[70%]"
                   >
                     <div className="flex items-start gap-x-4">
+                      <p className={`absolute top-0 right-3`}>
+                        {applicant.applicationStatus.charAt(0).toUpperCase() +
+                          applicant.applicationStatus.slice(1)}
+                      </p>
+
                       <img
                         className="w-[70px] rounded-full h-[70px]"
                         src={applicant?.resume?.candidateProfile.image}
@@ -115,13 +145,25 @@ const AllApplicantsUi = () => {
                             </p>
                           </section>
                         </div>
+                        {/* -------------- icon ----------------- */}
                         <div className="flex items-center gap-2">
+                          {job.jobId}
                           <IoIosEye
                             onClick={() => handleViewResume(applicant.resume)}
                             className="text-blue-600 cursor-pointer"
                           />
-                          <IoCheckmark className="text-blue-600 cursor-pointer" />
-                          <IoIosCloseCircleOutline className="text-blue-600 cursor-pointer" />
+                          <IoCheckmark
+                            onClick={() =>
+                              handelApproved(applicant.applicationId)
+                            }
+                            className="text-blue-600 cursor-pointer"
+                          />
+                          <IoIosCloseCircleOutline
+                            onClick={() =>
+                              handelRejected(applicant.applicationId)
+                            }
+                            className="text-blue-600 cursor-pointer"
+                          />
                         </div>
                       </div>
                     </div>

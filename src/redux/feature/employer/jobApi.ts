@@ -9,21 +9,45 @@ const JobApi = baseApi.injectEndpoints({
         body: jobData,
       }),
     }),
-    getAllApplicants:builder.query({
-      query:()=>{
-        return{
-          url:"/get-allApplicants"
-        }
-      }
+    getAllApplicants: builder.query({
+      query: () => {
+        return {
+          url: "/get-allApplicants",
+        };
+      },
     }),
-    employerAllJob:builder.query({
-      query:()=>{
-        return{
-          url :"/get-companyAllJob"
-        }
-      }
-    })
+    employerAllJob: builder.query({
+      query: () => {
+        return {
+          url: "/get-companyAllJob",
+        };
+      },
+    }),
+    approvedApplication: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/approved/${id}`,
+          method: "PUT",
+          body: {},
+        };
+      },
+    }),
+    rejectApplication: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/reject/${id}`,
+          method: "PUT",
+          body: {},
+        };
+      },
+    }),
   }),
 });
 
-export const { usePostJobMutation ,useGetAllApplicantsQuery,useEmployerAllJobQuery} = JobApi;
+export const {
+  usePostJobMutation,
+  useGetAllApplicantsQuery,
+  useEmployerAllJobQuery,
+  useApprovedApplicationMutation,
+  useRejectApplicationMutation
+} = JobApi;
