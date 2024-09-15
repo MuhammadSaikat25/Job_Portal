@@ -13,6 +13,7 @@ import CandidateResume from "../pages/Dashboard/candidate/candidate-resume/Candi
 import Jobs from "../pages/Jobs/Jobs";
 import JobDetails from "../pages/Job-details/JobDetails";
 import AllApplicants from "../pages/Dashboard/Employer/AllApplicants";
+import ManageJob from "../pages/Dashboard/Employer/ManageJob";
 
 
 const router = createBrowserRouter([
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path:"all-applicants",
         element:<AllApplicants/>
+      },
+      {
+        path:"manage-job",
+        element:<ManageJob/>
       }
     ],
   },

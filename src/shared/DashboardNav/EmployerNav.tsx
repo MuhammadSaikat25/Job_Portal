@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/icon.png";
 import { CiMenuBurger } from "react-icons/ci";
 
@@ -28,7 +28,8 @@ const EmployerNav = () => {
         <NavLink to={"dashboard-hero"}>Dashboard</NavLink>
         <NavLink to={"company-profile"}>Company Profile</NavLink>
         <NavLink to={"post-job"}>Post Job</NavLink>
-        <NavLink to={""}>Manage Job</NavLink>
+
+        <NavLink to={"manage-job"}>Manage job</NavLink>
         <NavLink to={"all-applicants"}>All Applicants</NavLink>
         <NavLink to={""}>Shortlisted Resumes</NavLink>
         <NavLink to={""}>Change Password</NavLink>
