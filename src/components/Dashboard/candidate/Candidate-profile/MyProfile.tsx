@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAxiosPublic from "../../../../utils/useAxiosPublic";
+import { useGetCandidateProfileQuery } from "../../../../redux/feature/candidate/candidateProfileApi";
+
 type Props = {
-    candidateImage: string;
+  candidateImage: string;
   setCandidateImage: (image: string) => void;
 };
 const MyProfile = ({ setCandidateImage }: Props) => {
-  const [image, setImage] = useState<string | null>(null);
   const axiosPublic = useAxiosPublic();
+  const { data } = useGetCandidateProfileQuery(undefined);
+  const [image, setImage] = useState<string | null>(null);
 
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -33,15 +36,17 @@ const MyProfile = ({ setCandidateImage }: Props) => {
         });
 
         if (postImageRes) {
-           
-            setCandidateImage(postImageRes.data.data.url);
+          setCandidateImage(postImageRes.data.data.url);
         }
       } catch (error) {
         console.error("Error uploading image:", error);
       }
     }
   };
-
+  console.log(data?.data);
+  useEffect(() => {
+    setImage(data?.data.image);
+  }, [data]);
   return (
     <div className="w-full my-3 ">
       <input

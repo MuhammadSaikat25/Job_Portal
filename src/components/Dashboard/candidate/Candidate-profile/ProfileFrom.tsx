@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MyProfile from "./MyProfile";
-import { useCreateCandidateProfileMutation } from "../../../../redux/feature/candidate/candidateProfileApi";
+import {
+  useCreateCandidateProfileMutation,
+  useGetCandidateProfileQuery,
+} from "../../../../redux/feature/candidate/candidateProfileApi";
 import { toast, Toaster } from "react-hot-toast";
 import { useAppSelector } from "../../../../redux/hooks";
 import { RootState } from "../../../../redux/store";
@@ -9,13 +12,14 @@ const ProfileForm = () => {
   const user = useAppSelector((state: RootState) => state.auth.user);
   const [createCandidateProfile] = useCreateCandidateProfileMutation();
   const [candidateImage, setCandidateImage] = useState("");
- 
+  const { data } = useGetCandidateProfileQuery(undefined);
+
   const [formData, setFormData] = useState({
     name: "",
     image: candidateImage,
     jobTitle: "",
     phone: "",
-    email: user?.email,
+    email: user?.email || "",
     currentSalary: "",
     expectedSalary: "",
     experience: "",
@@ -24,7 +28,27 @@ const ProfileForm = () => {
     city: "",
     address: "",
   });
-  
+
+
+  useEffect(() => {
+    if (data?.data) {
+      setFormData({
+        name: data.data.name || "",
+        image: candidateImage || data.data.image ,
+        jobTitle: data.data.jobTitle || "",
+        phone: data.data.phone || "",
+        email: user?.email || data.data.email || "",
+        currentSalary: data.data.currentSalary || "",
+        expectedSalary: data.data.expectedSalary || "",
+        experience: data.data.experience || "",
+        age: data.data.age || "",
+        country: data.data.country || "",
+        city: data.data.city || "",
+        address: data.data.address || "",
+      });
+    }
+  }, [data, candidateImage, user?.email]);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const res = await createCandidateProfile({
@@ -33,9 +57,8 @@ const ProfileForm = () => {
     });
     console.log({ ...formData, image: candidateImage });
     if (res.data) {
-      toast.success("Candidate profile Create successful");
-    }
-    if (res.error) {
+      toast.success("Candidate profile created successfully");
+    } else if (res.error) {
       toast.error("Something went wrong");
     }
   };
@@ -94,7 +117,7 @@ const ProfileForm = () => {
             name="email"
             placeholder="Email"
             type="email"
-            value={user!.email}
+            value={formData.email}
             className="bg-stone-200 border border-gray-500 p-2 rounded-sm lg:w-[50%]"
             readOnly
           />

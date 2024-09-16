@@ -14,7 +14,7 @@ import Jobs from "../pages/Jobs/Jobs";
 import JobDetails from "../pages/Job-details/JobDetails";
 import AllApplicants from "../pages/Dashboard/Employer/AllApplicants";
 import ManageJob from "../pages/Dashboard/Employer/ManageJob";
-
+import AppliedJobs from "../pages/Dashboard/candidate/Applied-Jobs/AppliedJobs";
 
 const router = createBrowserRouter([
   {
@@ -60,13 +60,13 @@ const router = createBrowserRouter([
         element: <PostJob />,
       },
       {
-        path:"all-applicants",
-        element:<AllApplicants/>
+        path: "all-applicants",
+        element: <AllApplicants />,
       },
       {
-        path:"manage-job",
-        element:<ManageJob/>
-      }
+        path: "manage-job",
+        element: <ManageJob />,
+      },
     ],
   },
   {
@@ -80,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: "candidate-resume",
         element: <CandidateResume />,
+      },
+      {
+        path: "applied-jobs",
+        element: <AppliedJobs />,
       },
     ],
   },

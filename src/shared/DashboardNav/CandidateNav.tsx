@@ -29,6 +29,7 @@ const CandidateNav = () => {
         <NavLink to={"/candidate/dashboard/candidate-resume"}>
           My Resume
         </NavLink>
+        <NavLink to={"/candidate/dashboard/applied-jobs"}>Applied Jobs</NavLink>
         <NavLink to={""}>Change Password</NavLink>
         <NavLink to={""}>Logout</NavLink>
       </div>

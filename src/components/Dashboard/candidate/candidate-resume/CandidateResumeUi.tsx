@@ -11,18 +11,20 @@ import {
 } from "../../../../redux/feature/candidate/resumeApi";
 import { toast, Toaster } from "react-hot-toast";
 import Skill from "./skill/Skill";
+import { useNavigate } from "react-router-dom";
 
 const CandidateResumeUi = () => {
   const user = useAppSelector((state: RootState) => state.auth.user);
   const { data } = useGetCandidateProfileQuery(undefined);
   const { data: MyResume } = useGetMyResumeQuery(undefined);
+  const navigate = useNavigate();
 
   const [createResume] = useCreateResumeMutation();
   const [description, setDescription] = useState("");
   const [education, setEducation] = useState<any>([]);
   const [works, setWorks] = useState<any>([]);
   const [project, setProject] = useState<any>([]);
-  const [skill, setSkill] = useState<any>([]);
+  const [skill, setSkill] = useState<any>(MyResume?.data?.skill || []);
 
   const resume = {
     email: user?.email,
@@ -35,6 +37,12 @@ const CandidateResumeUi = () => {
   };
 
   const handelResume = async () => {
+    if (!data?.data?._id) {
+      toast.error("Please create your profile");
+      return setTimeout(() => {
+        navigate("/candidate/dashboard/myProfile");
+      }, 700);
+    }
     if (
       education?.length === 0 &&
       works?.length === 0 &&
@@ -56,7 +64,7 @@ const CandidateResumeUi = () => {
         <textarea
           name=""
           id=""
-          value={MyResume?.data?.description}
+          defaultValue={MyResume?.data?.description || ""}
           className="bg-[#F0F5F7] w-full p-2 rounded-md"
           placeholder="Description"
           onChange={(e) => setDescription(e.target.value)}
@@ -65,7 +73,11 @@ const CandidateResumeUi = () => {
         <WorkExperience works={works} setWorks={setWorks} />
         <Projects setProject={setProject} project={project} />
         <h1>Skill</h1>
-        <Skill setSkill={setSkill} skill={skill} />
+        <Skill
+          setSkill={setSkill}
+          skill={skill}
+          mySkill={MyResume?.data?.skill}
+        />
         <button
           onClick={handelResume}
           className="bg-blue-950 w-full p-1 rounded-sm text-white mt-3"

@@ -47,7 +47,7 @@ const Education = ({ setEducation }: Props) => {
         description,
       };
       setEducations([...educations, newEducation]);
-      setEducation([...myResume?.data?.education, newEducation]);
+      setEducation([...(myResume?.data?.education || []), newEducation]);
     }
 
     setAddModal(false);
@@ -63,7 +63,6 @@ const Education = ({ setEducation }: Props) => {
   };
 
   const handleEdit = (education: any) => {
-    console.log(education);
     setDegree(education.degree || "");
     setYear(education.year || "");
     setInstitution(education.institution || "");
@@ -177,7 +176,7 @@ const Education = ({ setEducation }: Props) => {
               type="submit"
               className="bg-blue-500 text-white p-2 rounded-md"
             >
-              {editId ? "Update Education" : "Add Education"}{" "}
+              {editId ? "Update Education" : "Add Education"}
             </button>
           </form>
         </div>

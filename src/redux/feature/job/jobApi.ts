@@ -16,30 +16,43 @@ const JobApi = baseApi.injectEndpoints({
         };
       },
     }),
-    singleJob:builder.query({
-      query:(id)=>{
-        return{
-          url:`job-details/${id}`
-        }
-      }
+    singleJob: builder.query({
+      query: (id) => {
+        return {
+          url: `job-details/${id}`,
+        };
+      },
     }),
-    appliedJob:builder.mutation({
-      query:(data)=>{
-        return{
-          url:"/applied-job",
-          method:"POST",
-          body:data
-        }
-      }
+    appliedJob: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/applied-job",
+          method: "POST",
+          body: data,
+        };
+      },
     }),
-    amIApplied:builder.query({
-      query:(id)=>{
-        return{
-          url:`/get-applied-job/${id}`
-        }
-      }
-    })
+    amIApplied: builder.query({
+      query: (id) => {
+        return {
+          url: `/get-applied-job/${id}`,
+        };
+      },
+    }),
+    getAllAppliedJob: builder.query({
+      query: () => {
+        return {
+          url: "get-applied-job",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetALlJObQuery,useSingleJobQuery,useAppliedJobMutation,useAmIAppliedQuery } = JobApi;
+export const {
+  useGetALlJObQuery,
+  useSingleJobQuery,
+  useAppliedJobMutation,
+  useAmIAppliedQuery,
+  useGetAllAppliedJobQuery,
+} = JobApi;
