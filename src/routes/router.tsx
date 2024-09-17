@@ -15,6 +15,8 @@ import JobDetails from "../pages/Job-details/JobDetails";
 import AllApplicants from "../pages/Dashboard/Employer/AllApplicants";
 import ManageJob from "../pages/Dashboard/Employer/ManageJob";
 import AppliedJobs from "../pages/Dashboard/candidate/Applied-Jobs/AppliedJobs";
+import Message from "../pages/Dashboard/Employer/Message";
+import CandidateMessage from "../pages/Dashboard/candidate/CandidateMessage";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,10 @@ const router = createBrowserRouter([
         element: <EmployerDashboard />,
       },
       {
+        path: "message",
+        element: <Message />,
+      },
+      {
         path: "company-profile",
         element: <CompanyProfile />,
       },
@@ -85,6 +91,10 @@ const router = createBrowserRouter([
         path: "applied-jobs",
         element: <AppliedJobs />,
       },
+      {
+        path:"message",
+        element:<CandidateMessage/>
+      }
     ],
   },
 ]);

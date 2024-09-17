@@ -30,6 +30,7 @@ const CandidateNav = () => {
           My Resume
         </NavLink>
         <NavLink to={"/candidate/dashboard/applied-jobs"}>Applied Jobs</NavLink>
+        <NavLink to={"/candidate/dashboard/message"}>Message</NavLink>
         <NavLink to={""}>Change Password</NavLink>
         <NavLink to={""}>Logout</NavLink>
       </div>
