@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import bag from "../../../../assets/bag.png";
-import { toast, Toaster } from "react-hot-toast";
+import {  Toaster } from "react-hot-toast";
 import { FaLocationPin } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import EditJob from "./EditJob";

@@ -31,6 +31,7 @@ const EmployerNav = () => {
         <NavLink to={"manage-job"}>Manage job</NavLink>
         <NavLink to={"all-applicants"}>All Applicants</NavLink>
         <NavLink to={"message"}>Message</NavLink>
+        <NavLink to={"video-call"}>Video</NavLink>
         <NavLink to={""}>Shortlisted Resumes</NavLink>
         <NavLink to={""}>Change Password</NavLink>
         <NavLink to={""}>Logout</NavLink>
