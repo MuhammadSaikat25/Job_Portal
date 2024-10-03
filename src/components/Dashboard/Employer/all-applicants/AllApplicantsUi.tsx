@@ -112,7 +112,7 @@ const AllApplicantsUi = () => {
                 {job.applicants.map((applicant: any, i: number) => (
                   <div
                     key={i}
-                    className="border border-gray-300 p-5 rounded-sm w-full relative lg:w-[70%]"
+                    className="border border-gray-300 p-5 rounded-sm w-full relative lg:w-[80%]"
                   >
                     <div className="flex items-start gap-x-4">
                       <p className={`absolute top-0 right-3`}>

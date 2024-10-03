@@ -6,7 +6,7 @@ const MessageUi = () => {
   const [chatUser, setChatUser] = useState();
   const [messageModal, setMessageModal] = useState(false);
   return (
-    <div className="flex items-start gap-x-20">
+    <div className="lg:flex items-start gap-x-20">
       <MessageNav
         setMessageModal={setMessageModal}
         messageModal={messageModal}

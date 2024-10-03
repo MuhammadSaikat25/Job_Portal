@@ -8,10 +8,10 @@ type Props = {
   editModal: boolean;
   setEditModal: (editModal: boolean) => void;
   id: string;
-  refetch:any
+  refetch: any;
 };
-const EditJob = ({ id, setEditModal,refetch }: Props) => {
-  const { data,refetch:singleJobRefetch } = useSingleJobQuery(id);
+const EditJob = ({ id, setEditModal, refetch }: Props) => {
+  const { data, refetch: singleJobRefetch } = useSingleJobQuery(id);
   const job = data?.data.singleJob;
   const [updateJob] = useUpdateJobMutation();
   const [responsibilities, setResponsibilities] = useState<string[]>([""]);
@@ -95,15 +95,16 @@ const EditJob = ({ id, setEditModal,refetch }: Props) => {
 
     const res = await updateJob({ jobPostData, id: job._id });
     setEditModal(false);
-    refetch()
-    singleJobRefetch()
+    refetch();
+    singleJobRefetch();
     if (res.data) {
       toast.success("Job update successful");
     }
   };
   return (
-    <div>
+    <div className="">
       <Toaster />
+
       <form onSubmit={handleSubmit} className="w-full">
         <div className="bg-white p-6 rounded-sm shadow shadow-blue-300">
           {/* Title */}
@@ -301,7 +302,7 @@ const EditJob = ({ id, setEditModal,refetch }: Props) => {
             <input
               type="number"
               id="salary"
-              className="bg-slate-300 p-2 rounded-sm"
+              className="bg-slate-300 p-2 rounded-sm w-full"
               placeholder="Salary"
               value={salary}
               onChange={(e) => setSalary(Number(e.target.value))}

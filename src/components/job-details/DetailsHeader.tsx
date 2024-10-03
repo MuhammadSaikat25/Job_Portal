@@ -13,7 +13,6 @@ import {
 
 const DetailsHeader = ({ job }: { job: any }) => {
   const user = useAppSelector((state: RootState) => state.auth.user);
-  console.log(user)
   const { data } = useGetMyResumeQuery(undefined);
   const navigate = useNavigate();
   const [appliedJob] = useAppliedJobMutation();
@@ -42,7 +41,7 @@ const DetailsHeader = ({ job }: { job: any }) => {
       toast.success("Successfully Applied");
     }
   };
-  
+
   return (
     <div>
       <Toaster />

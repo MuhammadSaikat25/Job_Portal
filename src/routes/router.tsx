@@ -18,6 +18,7 @@ import AppliedJobs from "../pages/Dashboard/candidate/Applied-Jobs/AppliedJobs";
 import Message from "../pages/Dashboard/Employer/Message";
 import CandidateMessage from "../pages/Dashboard/candidate/CandidateMessage";
 import VideoCall from "../pages/Dashboard/Employer/VideoCall";
+import CVideo from "../pages/Dashboard/candidate/CVideo";
 
 const router = createBrowserRouter([
   {
@@ -101,6 +102,10 @@ const router = createBrowserRouter([
         path: "message",
         element: <CandidateMessage />,
       },
+      {
+        path:"video",
+        element:<CVideo/>
+      }
     ],
   },
 ]);

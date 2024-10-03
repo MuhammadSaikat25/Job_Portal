@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import bag from "../../../../assets/bag.png";
-import {  Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { FaLocationPin } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import EditJob from "./EditJob";
@@ -15,7 +15,7 @@ import EditJob from "./EditJob";
 const ManageJobUi = () => {
   const [jobId, setJobId] = useState("");
   const [editModal, setEditModal] = useState(false);
-  const { data,refetch } = useEmployerAllJobQuery(undefined);
+  const { data, refetch } = useEmployerAllJobQuery(undefined);
   const date = new Date();
   const currentDate = date.toISOString().slice(0, 10);
   const rows = data?.data;
@@ -42,7 +42,8 @@ const ManageJobUi = () => {
     };
   }, [editModal]);
   return (
-    <div className="py-10 px-3">
+    <div className="p-5">
+      <h1 className="pb-3 text-gray-950 font-semibold">Manage jobs!</h1>
       <Toaster />
       <TableContainer component={Paper} className="h-[30%] scroll-container">
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -110,7 +111,7 @@ const ManageJobUi = () => {
                     onClick={() => handelEdit(row._id)}
                     className="text-white bg-blue-700 p-1 rounded-sm"
                   >
-                    Edit Role
+                    Edit Job
                   </button>
                 </TableCell>
               </TableRow>
@@ -122,7 +123,7 @@ const ManageJobUi = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-5">
           <div
             ref={modalRef}
-            className="bg-white p-6 rounded h-[600px] overflow-y-auto lg:w-[45%]"
+            className="bg-white p-6 rounded h-[550px] overflow-y-auto lg:w-[45%]"
           >
             <EditJob
               editModal={editModal}

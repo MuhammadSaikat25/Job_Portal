@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ImageInput from "./ImageInput";
 import MultipleSelect from "./MultipleSelect";
-import { useCreateCompanyMutation } from "../../../../redux/feature/employer/companyApi";
+import { useCreateCompanyMutation, useGetMyCompanyQuery } from "../../../../redux/feature/employer/companyApi";
 import toast, { Toaster } from "react-hot-toast";
 import { useAppSelector } from "../../../../redux/hooks";
 import { RootState } from "../../../../redux/store";
@@ -10,6 +10,8 @@ const ProfileForm = () => {
   const user = useAppSelector((state: RootState) => state.auth.user);
   const [createCompany, { isLoading }] = useCreateCompanyMutation();
   const [aboutCompany, setAboutCompany] = useState<string[]>([]);
+  const {data}=useGetMyCompanyQuery(undefined)
+ 
   const [formData, setFormData] = useState({
     companyName: "",
     email: user?.email,
@@ -72,7 +74,23 @@ const ProfileForm = () => {
       setCompanyImage("");
     }
   };
-
+  useEffect(() => {
+    if (data?.data) {
+      setFormData((prev) => ({
+        ...prev,
+        companyName: data.data.companyName || prev.companyName,
+        email: user?.email,
+        phone: data.data.phone || prev.phone,
+        website: data.data.website || prev.website,
+        teamSize: data.data.teamSize || prev.teamSize,
+        CompanyDescription: data.data.CompanyDescription || prev.CompanyDescription,
+        country: data.data.country || prev.country,
+        city: data.data.city || prev.city,
+        address: data.data.address || prev.address,
+      }));
+      setAboutCompany(data.data.aboutCompany || []);
+    }
+  }, [data, user?.email]);
   return (
     <div className="rounded-md py-10 ">
       <Toaster />

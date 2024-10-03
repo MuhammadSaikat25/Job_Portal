@@ -7,7 +7,7 @@ const EmployerLayout = () => {
       <div className="fixed top-0 z-10">
         <EmployerNav />
       </div>
-      <div className="flex-1 overflow-y-auto lg:pl-[160px]">
+      <div className="flex-1 overflow-y-auto lg:pl-[185px]">
         <Outlet />
       </div>
     </div>

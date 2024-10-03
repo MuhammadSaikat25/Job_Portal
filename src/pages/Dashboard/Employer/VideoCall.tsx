@@ -2,7 +2,10 @@ import VideoCallUi from "../../../components/Dashboard/Employer/video-call/Video
 
 const VideoCall = () => {
   return (
-    <div>
+    <div className="bg-gray-300 h-screen p-10 py-32">
+      <p className="text-[20px] text-gray-950 font-semibold lg:pl-20">
+        Create a room for interview
+      </p>
       <VideoCallUi />
     </div>
   );

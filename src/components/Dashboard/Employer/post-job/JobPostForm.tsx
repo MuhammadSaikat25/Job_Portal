@@ -285,7 +285,7 @@ const JobPostForm = () => {
             <input
               type="number"
               id="salary"
-              className="bg-slate-300 p-2 rounded-sm"
+              className="bg-slate-300 p-2 rounded-sm w-full"
               placeholder="Salary"
               value={salary}
               onChange={(e) => setSalary(Number(e.target.value))}

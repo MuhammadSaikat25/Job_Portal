@@ -18,7 +18,7 @@ export function getUrlParams(url = window.location.href) {
   return new URLSearchParams(urlStr);
 }
 
-export default function App() {
+export default function CVideo() {
   const roomID = getUrlParams().get("roomID") || randomID(5);
   let myMeeting = async (element: any) => {
     try {
@@ -77,7 +77,7 @@ export default function App() {
     <div
       className="myCallContainer"
       ref={myMeeting}
-      style={{ width: "80vw", height: "80vh" }}
+      style={{ width: "100vw", height: "100vh" }}
     ></div>
   );
 }

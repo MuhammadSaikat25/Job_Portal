@@ -46,7 +46,7 @@ const JobCard = ({ job }: { job: any }) => {
         </div>
       </div>
       <section className="flex items-center gap-x-2">
-        <h1>{format(job.company.updatedAt)}</h1>
+        <h1>{format(job.createdAt)}</h1>
       </section>
     </Link>
   );

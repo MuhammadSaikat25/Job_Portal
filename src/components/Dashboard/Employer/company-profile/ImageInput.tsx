@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAxiosPublic from "../../../../utils/useAxiosPublic";
 import { FadeLoader } from "react-spinners";
+import { useGetMyCompanyQuery } from "../../../../redux/feature/employer/companyApi";
 type Props = {
   companyImage: string;
   setCompanyImage: (image: string) => void;
@@ -9,6 +10,7 @@ type Props = {
 const ImageInput = ({ setCompanyImage }: Props) => {
   const [image, setImage] = useState<string | null>(null);
   const axiosPublic = useAxiosPublic();
+  const { data } = useGetMyCompanyQuery(undefined);
 
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -42,7 +44,11 @@ const ImageInput = ({ setCompanyImage }: Props) => {
       }
     }
   };
-
+  useEffect(() => {
+    if (data?.data) {
+      setImage(data?.data?.image);
+    }
+  }, [data]);
   return (
     <div className="w-full my-3 ">
       <input
@@ -52,21 +58,21 @@ const ImageInput = ({ setCompanyImage }: Props) => {
         className="hidden"
         onChange={handleFile}
       />
-      <label htmlFor="file" className="border w-full px-4 rounded-full py-1">
-        My Profile
-        {image && (
-          <div className="relative">
-            <img
-              className="w-full object-cover h-[180px] mt-2"
-              src={image}
-              alt="Uploaded"
-            />
-            <p className="absolute top-3 left-1 z-50">
-              <FadeLoader />
-            </p>
-          </div>
-        )}
+      <label
+        htmlFor="file"
+        className=" w-full cursor-pointer px-4 rounded-full bg-gray-600 text-white py-1"
+      >
+        Profile
       </label>
+      {image && (
+        <div className="relative">
+          <img
+            className="w-full object-cover rounded-md h-[180px] mt-2"
+            src={image}
+            alt="Uploaded"
+          />
+        </div>
+      )}
     </div>
   );
 };

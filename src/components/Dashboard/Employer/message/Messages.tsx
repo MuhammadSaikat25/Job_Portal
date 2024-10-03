@@ -19,7 +19,9 @@ const Messages = ({ message }: { message: any }) => {
             fromMe ? "flex items-center justify-end " : ""
           }`}
         >
-          <h1 className={`${fromMe ? "block font-semibold" : "hidden"}`}>You</h1>
+          <h1 className={`${fromMe ? "block font-semibold" : "hidden"}`}>
+            You
+          </h1>
           <img
             alt=""
             className={`w-[50px] h-[50px] rounded-full`}

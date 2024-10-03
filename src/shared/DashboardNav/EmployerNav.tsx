@@ -23,7 +23,7 @@ const EmployerNav = () => {
   }, []);
   return (
     <nav className="">
-      <div className="w-fit bg-red-600 lg:flex flex-col min-h-screen p-2 gap-y-5 hidden">
+      <div className="w-fit bg-[#FFFFFF] lg:flex flex-col min-h-screen px-4 pt-2 gap-y-5 hidden">
         <NavLink to={"/"}>Home</NavLink>
         <NavLink to={"dashboard-hero"}>Dashboard</NavLink>
         <NavLink to={"company-profile"}>Company Profile</NavLink>

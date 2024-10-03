@@ -2,8 +2,7 @@ import ManageJobUi from "../../../components/Dashboard/Employer/manage-job/Manag
 
 const ManageJob = () => {
   return (
-    <div className="bg-[#F5F7FC]">
-      <h1>Manage jobs!</h1>
+    <div className="bg-[#F5F7FC] ">
       <ManageJobUi />
     </div>
   );

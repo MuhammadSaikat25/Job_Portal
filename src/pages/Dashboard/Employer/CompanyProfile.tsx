@@ -2,7 +2,7 @@ import CompanyProfileUIi from "../../../components/Dashboard/Employer/company-pr
 
 const CompanyProfile = () => {
   return (
-    <div className="bg-[#F5F7FC] h-screen py-3">
+    <div className="bg-[#F5F7FC] h-full py-3">
       <CompanyProfileUIi />
     </div>
   );
