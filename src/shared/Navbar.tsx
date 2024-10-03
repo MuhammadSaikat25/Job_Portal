@@ -13,8 +13,8 @@ const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [singUpModal, setSingUpModal] = useState(false);
   const [menu, setMenu] = useState(false);
-  const location=useLocation()
-  
+  const location = useLocation();
+
   const handleScroll = () => {
     setScroll(window.scrollY);
   };
@@ -30,8 +30,14 @@ const Navbar = () => {
   return (
     <nav className="">
       <div
-        className={`hidden lg:block fixed top-0 w-full text-white ${location.pathname==='/' ? "transition-all duration-500":""}  ${
-          scroll >= 80 ? "lg:bg-[#22218C] py-4" : `${location?.pathname==="/"?"bg-transparent":"bg-[#22218C]"} py-5`
+        className={`hidden lg:block fixed top-0 w-full text-white ${
+          location.pathname === "/" ? "transition-all duration-500" : ""
+        }  ${
+          scroll >= 80
+            ? "lg:bg-[#22218C] py-4"
+            : `${
+                location?.pathname === "/" ? "bg-transparent" : "bg-[#22218C]"
+              } py-5`
         }`}
       >
         {scroll >= 80 ? (
@@ -39,16 +45,21 @@ const Navbar = () => {
             <div className="flex items-center justify-around">
               <img className="w-[40px]" src={logo} alt="" />
               <div className="flex items-center gap-5">
-              <Link to={""}>Home</Link>
-              <Link to={"/jobs"}>Find job</Link>
-              <Link to={""}>Employers</Link>
-              <Link to={""}>Candidate</Link>
+                <Link to={""}>Home</Link>
+                <Link to={"/jobs"}>Find job</Link>
+                <Link to={""}>Employers</Link>
+                <Link to={""}>Candidate</Link>
                 <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
                   <button onClick={() => setLoginModal(true)}>Login</button>
                   <p>/</p>
                   <button onClick={() => setSingUpModal(true)}>Register</button>
                 </div>
-                <Link to={"employ-dashboard/dashboard-hero"}>Dashboard</Link>
+                {user?.role === "employer" && (
+                  <Link to={"employ-dashboard/dashboard-hero"}>Dashboard</Link>
+                )}
+                {user?.role === "candidate" && (
+                  <Link to={"/candidate/dashboard/myProfile"}>Dashboard</Link>
+                )}
               </div>
             </div>
           </>

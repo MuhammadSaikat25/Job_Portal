@@ -12,7 +12,7 @@ const JobTable = ({ appliedJob }: { appliedJob: [] }) => {
   const rows = appliedJob;
   const date = new Date();
   const currentDate = date.toISOString().slice(0, 10);
-
+  console.log(rows)
   return (
     <div>
       <TableContainer component={Paper} className="h-[30%] scroll-container p-2">
@@ -60,7 +60,7 @@ const JobTable = ({ appliedJob }: { appliedJob: [] }) => {
                   {row?.applicationStatus}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <p> {row?.createdAt.split("T")[0]}</p>
+                  <p> {row?.createdAt?.split("T")[0]}</p>
                 </TableCell>
                 <TableCell component="th" scope="row">
                   <p
