@@ -10,14 +10,14 @@ const HowItWorks = () => {
     AOS.init();
   }, []);
   return (
-    <div data-aos="fade-up-right" className="w-[60%] mx-auto">
-      <div className="text-center py-20">
-        <h1 className="lg:text-2xl text-gray-950 font-semibold">
+    <div data-aos="zoom-in" className="w-[60%] mx-auto flex flex-col justify-center pb-20">
+      <div className="text-center py-10">
+        <h1 className="text-2xl text-gray-950 font-semibold">
           How It Works?
         </h1>
         <p className="text-gray-500">Job for anyone, anywhere</p>
       </div>
-      <div className="flex items-center gap-5 justify-between text-gray-600 font-semibold">
+      <div className="flex items-start flex-wrap gap-10 justify-center text-gray-600 font-semibold">
         <div className="flex flex-col items-center justify-center gap-3  ">
           <img src={icon1} alt="" />
           <p className="text-center py-3">
