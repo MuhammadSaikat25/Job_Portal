@@ -9,15 +9,15 @@ const JobCard = ({ job }: { job: any }) => {
   return (
     <Link
       to={`/job-details/${job._id}`}
-      className="w-full border rounded border-gray-400 p-4"
+      className="w-full border rounded border-gray-200 p-4 hover:shadow-md shadow-gray-400 duration-500 bg-[#FCFAEE]"
     >
-      <div className="my-3 flex items-start gap-x-4 w-full">
+      <div className="my-3 flex items-start gap-x-4 w-full ">
         <div className="flex mt-1 items-center gap-x-3">
-          <img className="w-[70px] h-[50px] " src={job.company.image} alt="" />
+          <img className="w-[70px] h-[50px] rounded-md" src={job.company.image} alt="" />
         </div>
         <div className="">
-          <p>{job.title}</p>
-          <div className="flex items-center gap-x-2">
+          <p className="text-gray-950 font-semibold hover:text-blue-800 duration-400 w-fit">{job.title}</p>
+          <div className="flex items-center gap-x-2 text-[#696969]">
             <section className="flex items-center gap-x-2">
               <img className="w-[20px]" src={bag} alt="" />
               <h1>{job.company.companyName}</h1>

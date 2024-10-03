@@ -46,6 +46,13 @@ const JobApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getPopularJob: builder.query({
+      query: () => {
+        return {
+          url: "/popular-job",
+        };
+      },
+    }),
   }),
 });
 
@@ -55,4 +62,5 @@ export const {
   useAppliedJobMutation,
   useAmIAppliedQuery,
   useGetAllAppliedJobQuery,
+  useGetPopularJobQuery,
 } = JobApi;
