@@ -4,7 +4,7 @@ import JobCard from "../Jobs/JobCard";
 const PopularJob = () => {
   const { data } = useGetPopularJobQuery(undefined);
   return (
-    <div className=" lg:w-[100%] p-20 ">
+    <div className="lg:p-20 p-2">
       <h1 className="lg:text-2xl font-semibold text-gray-950 text-center">
         Most Popular Jobs
       </h1>
