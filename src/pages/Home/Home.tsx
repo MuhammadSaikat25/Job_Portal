@@ -1,3 +1,4 @@
+import Download from "../../components/home/Download";
 import Header from "../../components/home/Header";
 import HowItWorks from "../../components/home/HowItWorks";
 import PopularJob from "../../components/home/PopularJob";
@@ -10,6 +11,7 @@ const Home = () => {
       <PopularJob />
       <HowItWorks />
       <TopCompany />
+      <Download />
     </div>
   );
 };
