@@ -1,8 +1,9 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
 
 const HomeLayout = () => {
+  const { pathname } = useLocation();
   return (
     <div className="relative min-h-screen flex flex-col">
       <div className="fixed top-0 w-full z-10">
@@ -11,7 +12,7 @@ const HomeLayout = () => {
       <div className="overflow-hidden">
         <Outlet />
       </div>
-      <Footer />
+      {pathname === "/" && <Footer />}
     </div>
   );
 };

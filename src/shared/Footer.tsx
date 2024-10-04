@@ -4,12 +4,21 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { CiTwitter } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const Footer = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   const currentYear = new Date().getFullYear();
   return (
-    <div className="bg-[#0C071B] relative p-10 lg:p-20">
-      <img src={img} alt="" className="absolute -top-[180px] left-1 hidden lg:block" />
+    <div data-aos="fade-up" className="bg-[#0C071B] relative p-10 lg:p-20">
+      <img
+        src={img}
+        alt=""
+        className="absolute -top-[180px] left-1 hidden lg:block"
+      />
       <div className="text-gray-300 text-center">
         <p className="text-2xl font-semibold">Got a question?</p>
         <p className="text-sm py-2">

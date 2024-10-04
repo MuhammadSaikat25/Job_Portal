@@ -3,14 +3,16 @@ import { baseApi } from "../api/baseApi";
 const JobApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getALlJOb: builder.query({
-      query: ({ jobType, jobPosition, experience, salary }) => {
+      query: ({ jobType, jobPosition, experience, salary ,limit=5, page=1}) => {
         const queryString = new URLSearchParams({
           jobType,
           jobPosition,
           experience,
           salary: salary.join(","),
+          limit: limit.toString(), 
+          page: page.toString(),  
         }).toString();
-
+    
         return {
           url: `/get-jobs?${queryString}`,
         };
