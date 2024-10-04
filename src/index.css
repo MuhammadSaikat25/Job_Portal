@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @media (min-width: 1024px) {
   .popularJob {
     border-top-left-radius: 10%;
-    background-image: url('./assets/bg2.png');
+    background-image: url("./assets/bg2.png");
     border-bottom-left-radius: 20%;
   }
 }
+
 /* .custom-scroll::-webkit-scrollbar {
   display: none;
 }
@@ -19,10 +19,10 @@
   scrollbar-width: none;
 } */
 
-/* body {
+ body {
   font-family: "Roboto", sans-serif;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 3px;
 }
 

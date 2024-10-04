@@ -2,7 +2,7 @@ import img from "../../assets/recruiting.png";
 
 const Recruiting = () => {
   return (
-    <div className="lg:w-[85%] mx-auto py-4 p-3">
+    <div className="lg:w-[85%] mx-auto py-4 p-3 lg:mb-32">
       <div className="flex items-center bg-[#EFF4FC] rounded-lg justify-between ">
         <div className="p-10 w-[70%]">
           <h1 className="lg:text-2xl font-semibold text-gray-950">

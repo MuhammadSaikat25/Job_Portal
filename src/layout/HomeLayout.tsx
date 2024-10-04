@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../shared/Navbar";
+import Footer from "../shared/Footer";
 
 const HomeLayout = () => {
   return (
@@ -7,11 +8,13 @@ const HomeLayout = () => {
       <div className="fixed top-0 w-full z-10">
         <Navbar />
       </div>
-      <div className="flex-1 overflow-y-auto">
+      <div className="overflow-hidden">
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 };
 
 export default HomeLayout;
+// flex-1 overflow-y-auto
