@@ -22,7 +22,7 @@ const EmployerDUi = () => {
   }));
 
   return (
-    <div className="w-full h-svh bg-[#F5F7FC] p-6 pt-24 lg:pt-0">
+    <div className="w-full h-full bg-[#F5F7FC] p-6 pt-24 lg:pt-0">
       <h1 className="text-2xl text-gray-950 font-semibold">Dashboard Home!</h1>
       <div className="flex flex-col lg:flex-row gap-4 my-10 ">
         <div className="bg-[#FFFFFF] p-5 rounded-md flex items-center gap-3 lg:w-[20%] justify-between">
