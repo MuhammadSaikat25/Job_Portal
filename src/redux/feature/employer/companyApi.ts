@@ -9,15 +9,27 @@ const companyApi = baseApi.injectEndpoints({
         body: companyData,
       }),
     }),
-    getMyCompany:builder.query({
-      query:()=>{
-        return{
-          url:'/get-my-company',
-          method:"GET"
-        }
-      }
-    })
+    getMyCompany: builder.query({
+      query: () => {
+        return {
+          url: "/get-my-company",
+          method: "GET",
+        };
+      },
+    }),
+    companyOverview: builder.query({
+      query: () => {
+        return {
+          url: "/companyOverview",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
-export const { useCreateCompanyMutation,useGetMyCompanyQuery } = companyApi;
+export const {
+  useCreateCompanyMutation,
+  useGetMyCompanyQuery,
+  useCompanyOverviewQuery,
+} = companyApi;

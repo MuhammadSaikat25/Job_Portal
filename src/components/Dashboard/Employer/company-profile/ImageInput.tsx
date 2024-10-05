@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import useAxiosPublic from "../../../../utils/useAxiosPublic";
-import { FadeLoader } from "react-spinners";
 import { useGetMyCompanyQuery } from "../../../../redux/feature/employer/companyApi";
 type Props = {
   companyImage: string;

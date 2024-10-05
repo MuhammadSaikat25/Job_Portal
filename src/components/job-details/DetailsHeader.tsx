@@ -22,6 +22,10 @@ const DetailsHeader = ({ job }: { job: any }) => {
     if (!user) {
       return toast.error("Please login first");
     }
+    if(user?.role==='employer'){
+      return toast.error("Employer can not apply any job");
+    }
+    
     if (data?.data === null) {
       toast.error("Please Add your Resume");
       setTimeout(() => {

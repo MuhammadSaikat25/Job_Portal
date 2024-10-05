@@ -13,7 +13,7 @@ const Footer = () => {
   }, []);
   const currentYear = new Date().getFullYear();
   return (
-    <div data-aos="fade-up" className="bg-[#0C071B] relative p-10 lg:p-20">
+    <div data-aos="zoom-in" className="bg-[#0C071B] relative p-10 lg:p-20">
       <img
         src={img}
         alt=""

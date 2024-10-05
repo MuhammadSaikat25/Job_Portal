@@ -5,6 +5,7 @@ import { IoFilterSharp } from "react-icons/io5";
 import JobsNav from "./JobsNav";
 import CircularProgress from "@mui/material/CircularProgress";
 import { debounce } from "lodash";
+import JobCardSkeleton from "../JobCardSkeleton";
 
 const JobsUi = () => {
   const [jobs, setJobs] = useState<any[]>([]);
@@ -35,7 +36,6 @@ const JobsUi = () => {
     }
   }, [data, page]);
 
-  // Infinite scroll handler
   const handleInfiniteScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -109,9 +109,12 @@ const JobsUi = () => {
           )}
         </div>
       ) : (
-        <p className="text-center">
-          <CircularProgress color="secondary" />
-        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {[1, 2, 3, 4, 5].map(() => (
+              <JobCardSkeleton />
+           
+          ))}
+        </div>
       )}
     </div>
   );
