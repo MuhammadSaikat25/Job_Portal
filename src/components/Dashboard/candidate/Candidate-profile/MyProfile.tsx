@@ -43,7 +43,6 @@ const MyProfile = ({ setCandidateImage }: Props) => {
       }
     }
   };
-  console.log(data?.data);
   useEffect(() => {
     setImage(data?.data.image);
   }, [data]);
@@ -56,18 +55,18 @@ const MyProfile = ({ setCandidateImage }: Props) => {
         className="hidden"
         onChange={handleFile}
       />
-      <label htmlFor="file" className="border w-full px-4 rounded-full py-1">
-        My Profile
-        {image && (
-          <div className="relative">
-            <img
-              className="w-full object-cover h-[180px] mt-2"
-              src={image}
-              alt="Uploaded"
-            />
-          </div>
-        )}
+      <label htmlFor="file" className="border cursor-pointer w-full px-4 rounded-full py-1">
+        Upload Profile
       </label>
+      {image && (
+        <div className="relative">
+          <img
+            className="w-full object-cover rounded-md h-[180px] mt-2"
+            src={image}
+            alt="Uploaded"
+          />
+        </div>
+      )}
     </div>
   );
 };

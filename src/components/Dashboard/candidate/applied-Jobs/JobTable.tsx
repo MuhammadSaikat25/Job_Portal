@@ -12,10 +12,12 @@ const JobTable = ({ appliedJob }: { appliedJob: [] }) => {
   const rows = appliedJob;
   const date = new Date();
   const currentDate = date.toISOString().slice(0, 10);
-  console.log(rows)
   return (
     <div>
-      <TableContainer component={Paper} className="h-[30%] scroll-container p-2">
+      <TableContainer
+        component={Paper}
+        className="h-[30%] scroll-container p-2"
+      >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead className="bg-blue-300">
             <TableRow>

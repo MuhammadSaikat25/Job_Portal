@@ -47,8 +47,7 @@ const Navbar = () => {
               <div className="flex items-center gap-5">
                 <Link to={""}>Home</Link>
                 <Link to={"/jobs"}>Find job</Link>
-                <Link to={""}>Employers</Link>
-                <Link to={""}>Candidate</Link>
+
                 <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
                   <button onClick={() => setLoginModal(true)}>Login</button>
                   <p>/</p>
@@ -69,8 +68,7 @@ const Navbar = () => {
             <div className="flex items-center gap-5">
               <Link to={""}>Home</Link>
               <Link to={"/jobs"}>Find job</Link>
-              <Link to={""}>Employers</Link>
-              <Link to={""}>Candidate</Link>
+
               <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
                 <button onClick={() => setLoginModal(true)}>Login</button>
                 <p>/</p>

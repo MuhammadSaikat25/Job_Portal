@@ -5,10 +5,16 @@ import {
 } from "../../../../redux/feature/message/messageApi";
 import CMessage from "./CMessage";
 import { IoIosSend } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
+import { IoMenu } from "react-icons/io5";
 
 import { useGetAllUserQuery } from "../../../../redux/feature/user/userApi";
-
-const CConversations = ({ user }: { user: any }) => {
+type Props = {
+  messageModal: boolean;
+  setMessageModal: (messageModal: boolean) => void;
+  user: any;
+};
+const CConversations = ({ user, messageModal, setMessageModal }: Props) => {
   const { data: AllUser } = useGetAllUserQuery(undefined);
   const allUser = AllUser?.data;
 
@@ -23,21 +29,30 @@ const CConversations = ({ user }: { user: any }) => {
 
   const [sendMessage] = useSendMessageMutation();
   const [message, setMessage] = useState("");
+
   const handelMessage = async () => {
     await sendMessage({ id: sendMessageUser._id, text: message });
     refetch();
   };
   return (
-    <div className="w-[50%]">
+    <div className="lg:w-[50%] w-[90%] mx-auto">
       {user && (
-        <div className="bg-gray-100 h-[600px] overflow-y-auto p-4 scrollbar-hide w-full shadow-md rounded-md shadow-gray-300">
-          <h1 className="bg-slate-600 text-white p-2 rounded-sm my-2">
-            {user?.job.company?.companyName}
-          </h1>
+        <div className="bg-gray-100 h-[800px] lg:h-[500px] overflow-hidden overflow-y-auto w-full shadow-md rounded-md shadow-gray-300">
+          <div className="bg-slate-600 text-white p-2 rounded-sm my-2 flex items-center justify-between">
+            <p> {user?.job.company?.companyName}</p>
+            <button
+              className="lg:hidden"
+              onClick={() => setMessageModal(!messageModal)}
+            >
+              {messageModal ? <IoMdClose /> : <IoMenu />}
+            </button>
+          </div>
 
-          {data?.map((message: any, i: number) => (
-            <CMessage key={i} message={message} />
-          ))}
+          <div className="">
+            {data?.map((message: any, i: number) => (
+              <CMessage key={i} message={message} />
+            ))}
+          </div>
           <div className="relative">
             <input
               onChange={(e) => setMessage(e.target.value)}

@@ -2,6 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/icon.png";
 import { CiMenuBurger } from "react-icons/ci";
+import { PiReadCvLogoLight } from "react-icons/pi";
+import { FaUserAlt } from "react-icons/fa";
+import { MdOutlineWorkHistory } from "react-icons/md";
+import { RiMessage2Line } from "react-icons/ri";
+import { MdDashboardCustomize } from "react-icons/md";
+import { CiHome } from "react-icons/ci";
 
 const CandidateNav = () => {
   const [menu, setMenu] = useState(false);
@@ -22,17 +28,81 @@ const CandidateNav = () => {
     };
   }, []);
   return (
-    <nav className="">
-      <div className="w-fit bg-red-600 lg:flex flex-col min-h-screen p-2 gap-y-5 hidden">
-        <NavLink to={"/"}>Home</NavLink>
-        <NavLink to={"/candidate/dashboard/myProfile"}>My Profile</NavLink>
-        <NavLink to={"/candidate/dashboard/candidate-resume"}>
-          My Resume
+    <nav className="text-gray-800">
+      <div className="w-fit bg-[#FFFFFF] lg:flex flex-col min-h-screen p-2 gap-y-5 hidden">
+        <NavLink className={"flex items-center gap-x-1"} to={"/"}>
+          <span>
+            <CiHome />
+          </span>
+          Home
         </NavLink>
-        <NavLink to={"/candidate/dashboard/applied-jobs"}>Applied Jobs</NavLink>
-        <NavLink to={"/candidate/dashboard/message"}>Message</NavLink>
-        <NavLink to={""}>Change Password</NavLink>
-        <NavLink to={""}>Logout</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+              : "flex items-center gap-x-1"
+          }
+          to={"/candidate/dashboard/dashboard-hero"}
+        >
+          <span>
+            <MdDashboardCustomize />
+          </span>
+          <span>Dashboard</span>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+              : "flex items-center gap-x-1"
+          }
+          to={"/candidate/dashboard/myProfile"}
+        >
+          <span>
+            <FaUserAlt />
+          </span>
+          <span>My Profile</span>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+              : "flex items-center gap-x-1"
+          }
+          to={"/candidate/dashboard/candidate-resume"}
+        >
+          <span>
+            <PiReadCvLogoLight />
+          </span>
+          <span> My Resume</span>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+              : "flex items-center gap-x-1"
+          }
+          to={"/candidate/dashboard/applied-jobs"}
+        >
+          <span>
+            <MdOutlineWorkHistory />
+          </span>
+          <span>Applied Jobs</span>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+              : "flex items-center gap-x-1"
+          }
+          to={"/candidate/dashboard/message"}
+        >
+          <span>
+            <RiMessage2Line />
+          </span>
+          <span>Message</span>
+        </NavLink>
+
+        <NavLink to={"/"}>Logout</NavLink>
       </div>
       <div
         className={`fixed lg:hidden top-0 w-full text-white transition-all duration-500 bg-[#22218C] p-3`}
@@ -57,16 +127,80 @@ const CandidateNav = () => {
             <div className="">
               <img className="w-[40px]" src={logo} alt="" />
             </div>
-            <div className="flex flex-col gap-y-6 px-2 py-20">
-              <NavLink to={"/"}>Home</NavLink>
-              <NavLink to={"dashboard-hero"}>Dashboard</NavLink>
-              <NavLink to={"company-profile"}>Company Profile</NavLink>
-              <NavLink to={""}>Post Job</NavLink>
-              <NavLink to={""}>Manage Job</NavLink>
-              <NavLink to={""}>All Applicants</NavLink>
-              <NavLink to={""}>Shortlisted Resumes</NavLink>
-              <NavLink to={""}>Change Password</NavLink>
-              <NavLink to={""}>Logout</NavLink>
+            <div className="flex flex-col gap-y-6 p-4 py-20">
+              <NavLink className={"flex items-center gap-x-1"} to={"/"}>
+                <span>
+                  <CiHome />
+                </span>
+                Home
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+                    : "flex items-center gap-x-1"
+                }
+                to={"/candidate/dashboard/dashboard-hero"}
+              >
+                <span>
+                  <MdDashboardCustomize />
+                </span>
+                <span>Dashboard</span>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+                    : "flex items-center gap-x-1"
+                }
+                to={"/candidate/dashboard/myProfile"}
+              >
+                <span>
+                  <FaUserAlt />
+                </span>
+                <span>My Profile</span>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+                    : "flex items-center gap-x-1"
+                }
+                to={"/candidate/dashboard/candidate-resume"}
+              >
+                <span>
+                  <PiReadCvLogoLight />
+                </span>
+                <span> My Resume</span>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+                    : "flex items-center gap-x-1"
+                }
+                to={"/candidate/dashboard/applied-jobs"}
+              >
+                <span>
+                  <MdOutlineWorkHistory />
+                </span>
+                <span>Applied Jobs</span>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center gap-x-1 bg-blue-200 text-blue-500 p-1 rounded"
+                    : "flex items-center gap-x-1"
+                }
+                to={"/candidate/dashboard/message"}
+              >
+                <span>
+                  <RiMessage2Line />
+                </span>
+                <span>Message</span>
+              </NavLink>
+
+              <NavLink to={"/"}>Logout</NavLink>
             </div>
           </div>
         </div>

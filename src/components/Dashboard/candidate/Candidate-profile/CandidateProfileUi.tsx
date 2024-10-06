@@ -2,8 +2,8 @@ import ProfileFrom from "./ProfileFrom";
 
 const CandidateProfileUi = () => {
   return (
-    <div className="bg-[#F5F7FC] p-4 h-screen">
-      <p>My Profile!</p>
+    <div className="bg-[#F5F7FC] pt-20 lg:pt-0 p-5 h-full">
+      <p className="text-2xl font-semibold">My Profile!</p>
       <ProfileFrom />
     </div>
   );

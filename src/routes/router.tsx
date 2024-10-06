@@ -19,6 +19,7 @@ import Message from "../pages/Dashboard/Employer/Message";
 import CandidateMessage from "../pages/Dashboard/candidate/CandidateMessage";
 import VideoCall from "../pages/Dashboard/Employer/VideoCall";
 import CVideo from "../pages/Dashboard/candidate/CVideo";
+import CandidateDUi from "../components/Dashboard/candidate/CandidateDUi";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
     element: <CandidateLayout />,
     children: [
       {
+        path: "dashboard-hero",
+        element: <CandidateDUi />,
+      },
+      {
         path: "myProfile",
         element: <CandidateProfile />,
       },
@@ -103,9 +108,9 @@ const router = createBrowserRouter([
         element: <CandidateMessage />,
       },
       {
-        path:"video",
-        element:<CVideo/>
-      }
+        path: "video",
+        element: <CVideo />,
+      },
     ],
   },
 ]);
