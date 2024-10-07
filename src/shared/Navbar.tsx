@@ -48,11 +48,13 @@ const Navbar = () => {
                 <Link to={""}>Home</Link>
                 <Link to={"/jobs"}>Find job</Link>
 
+                {!user && (
                 <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
                   <button onClick={() => setLoginModal(true)}>Login</button>
                   <p>/</p>
                   <button onClick={() => setSingUpModal(true)}>Register</button>
                 </div>
+              )}
                 {user?.role === "employer" && (
                   <Link to={"employ-dashboard/dashboard-hero"}>Dashboard</Link>
                 )}
@@ -69,11 +71,13 @@ const Navbar = () => {
               <Link to={""}>Home</Link>
               <Link to={"/jobs"}>Find job</Link>
 
-              <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
-                <button onClick={() => setLoginModal(true)}>Login</button>
-                <p>/</p>
-                <button onClick={() => setSingUpModal(true)}>Register</button>
-              </div>
+              {!user && (
+                <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
+                  <button onClick={() => setLoginModal(true)}>Login</button>
+                  <p>/</p>
+                  <button onClick={() => setSingUpModal(true)}>Register</button>
+                </div>
+              )}
               {user?.role === "employer" && (
                 <Link to={"employ-dashboard/dashboard-hero"}>Dashboard</Link>
               )}
