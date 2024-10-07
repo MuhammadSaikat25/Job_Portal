@@ -28,8 +28,8 @@ const CandidateNav = () => {
     };
   }, []);
   return (
-    <nav className="text-gray-800">
-      <div className="w-fit bg-[#FFFFFF] lg:flex flex-col min-h-screen p-2 gap-y-5 hidden">
+    <nav className="text-gray-800 test bg-gray-200">
+      <div className="w-fit tets lg:flex flex-col min-h-screen p-2 gap-y-5 hidden">
         <NavLink className={"flex items-center gap-x-1"} to={"/"}>
           <span>
             <CiHome />

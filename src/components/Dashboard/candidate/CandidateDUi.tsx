@@ -17,7 +17,7 @@ import { CgSearchLoading } from "react-icons/cg";
 
 const CandidateDUi = () => {
   const user = useAppSelector((state: RootState) => state.auth.user);
-  const { data } = useCandidateOverviewQuery(undefined);
+  const { data } = useCandidateOverviewQuery(undefined,{refetchOnMountOrArgChange:true});
 
   const analytics = data?.data?.analytics || {};
 

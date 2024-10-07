@@ -26,7 +26,7 @@ const JobDetailsUi = () => {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading job details.</p>;
   if (!job) return <p>No job details available.</p>;
-  console.log(job);
+
   return (
     <div className="mt-[58Px] lg:mt-[80px]">
       <DetailsHeader job={job} />

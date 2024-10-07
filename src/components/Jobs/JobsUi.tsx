@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
-import { useGetALlJObQuery } from "../../redux/feature/job/jobApi";
+import {
+  useGetALlJObQuery,
+  useSearchJobQuery,
+} from "../../redux/feature/job/jobApi";
 import JobCard from "./JobCard";
 import { IoFilterSharp } from "react-icons/io5";
 import JobsNav from "./JobsNav";
 import CircularProgress from "@mui/material/CircularProgress";
 import { debounce } from "lodash";
 import JobCardSkeleton from "../JobCardSkeleton";
+import { useSearchParams } from "react-router-dom";
 
 const JobsUi = () => {
+  const [searchParams] = useSearchParams();
+
+  const title = searchParams.get("title") || "";
+  const location = searchParams.get("location") || "";
   const [jobs, setJobs] = useState<any[]>([]);
   const [page, setPage] = useState(1);
   const [jobDetails, setJobDetails] = useState<any>({
@@ -17,10 +25,13 @@ const JobsUi = () => {
     salary: [0, 10000],
   });
 
+  // get all job and filter by jobType, jobPosition, experience, salary
   const { data, isLoading, isFetching } = useGetALlJObQuery({
     ...jobDetails,
     page,
   });
+  const { data: searchJob, error } = useSearchJobQuery({ title, location });
+
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
@@ -62,9 +73,12 @@ const JobsUi = () => {
     setModal(false);
   };
 
+  // Conditionally render either searchJob or all jobs
+  const displayedJobs = searchJob?.data?.length > 0 ? searchJob?.data : jobs;
+ 
   return (
     <div className="mt-[80px] p-4 relative lg:w-[95%] mx-auto">
-      {!isLoading || jobs.length > 0 ? (
+      {!isLoading || displayedJobs.length > 0 ? (
         <div>
           {/* Filter Button */}
           <div
@@ -77,8 +91,8 @@ const JobsUi = () => {
 
           {/* Job Listings */}
           <div className="py-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {jobs?.map((job) => (
-              <JobCard key={job._id} job={job} />
+            {displayedJobs?.map((job: any, i: number) => (
+              <JobCard key={i} job={job} />
             ))}
           </div>
 
@@ -110,9 +124,8 @@ const JobsUi = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {[1, 2, 3, 4, 5].map(() => (
-              <JobCardSkeleton />
-           
+          {[1, 2, 3, 4, 5].map((_, i) => (
+            <JobCardSkeleton key={i} />
           ))}
         </div>
       )}

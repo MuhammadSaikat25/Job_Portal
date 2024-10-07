@@ -69,6 +69,17 @@ const JobApi = baseApi.injectEndpoints({
         };
       },
     }),
+    searchJob: builder.query({
+      query: ({ title, location }) => {
+        const queryParams = new URLSearchParams({
+          ...(title && { title }),
+          ...(location && { location }),
+        }).toString();
+        return {
+          url: `/search-job?${queryParams}`,
+        };
+      },
+    }),
   }),
 });
 
@@ -79,5 +90,6 @@ export const {
   useAmIAppliedQuery,
   useGetAllAppliedJobQuery,
   useGetPopularJobQuery,
-  useCandidateOverviewQuery
+  useCandidateOverviewQuery,
+  useSearchJobQuery,
 } = JobApi;
