@@ -30,7 +30,7 @@ const JobsUi = () => {
     ...jobDetails,
     page,
   });
-  const { data: searchJob, error } = useSearchJobQuery({ title, location });
+  const { data: searchJob } = useSearchJobQuery({ title, location });
 
   const [modal, setModal] = useState(false);
 

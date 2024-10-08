@@ -33,6 +33,7 @@ const JobsNav: FC<JobsNavProps> = ({ jobDetails, setJobDetails }) => {
   };
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    console.log(event)
     setJobDetails(prevState => ({
       ...prevState,
       salary: newValue as [number, number]

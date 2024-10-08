@@ -10,8 +10,11 @@ import { MdManageAccounts } from "react-icons/md";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { FaMessage } from "react-icons/fa6";
 import { CiVideoOn } from "react-icons/ci";
+import { useAppDispatch } from "../../redux/hooks";
+import { logOut } from "../../redux/feature/auth/authSlice";
 
 const EmployerNav = () => {
+  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
 
   const [menu, setMenu] = useState(false);
@@ -31,6 +34,7 @@ const EmployerNav = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+ 
   return (
     <nav className="">
       <div className="w-fit bg-[#FFFFFF] lg:flex flex-col min-h-screen px-4 pt-2 gap-y-5 hidden">
@@ -124,7 +128,14 @@ const EmployerNav = () => {
           </span>{" "}
           <span> Video</span>
         </NavLink>
-        <NavLink to={"/"}>Logout</NavLink>
+        <NavLink
+          to={"/"}
+          onClick={() => {
+            dispatch(logOut());
+          }}
+        >
+          Logout
+        </NavLink>
       </div>
       <div
         className={`fixed lg:hidden top-0 w-full text-white transition-all duration-500 bg-[#22218C] p-3`}
@@ -240,7 +251,14 @@ const EmployerNav = () => {
                 </span>{" "}
                 <span> Video</span>
               </NavLink>
-              <NavLink to={"/"}>Logout</NavLink>
+              <NavLink
+                to={"/"}
+                onClick={() => {
+                  dispatch(logOut());
+                }}
+              >
+                Logout
+              </NavLink>
             </div>
           </div>
         </div>

@@ -20,6 +20,8 @@ import CandidateMessage from "../pages/Dashboard/candidate/CandidateMessage";
 import VideoCall from "../pages/Dashboard/Employer/VideoCall";
 import CVideo from "../pages/Dashboard/candidate/CVideo";
 import CandidateDUi from "../components/Dashboard/candidate/CandidateDUi";
+import CandidateRoute from "./privet-route/CandidateRoute";
+import EmployerRoute from "./privet-route/employerRoute";
 
 const router = createBrowserRouter([
   {
@@ -54,32 +56,61 @@ const router = createBrowserRouter([
     children: [
       {
         path: "dashboard-hero",
-        element: <EmployerDashboard />,
+        element: (
+          <EmployerRoute>
+            <EmployerDashboard />
+          </EmployerRoute>
+        ),
       },
       {
         path: "message",
-        element: <Message />,
+        element: (
+          <EmployerRoute>
+            <Message />
+          </EmployerRoute>
+        ),
       },
       {
         path: "company-profile",
-        element: <CompanyProfile />,
+        element: (
+          <EmployerRoute>
+            <CompanyProfile />
+          </EmployerRoute>
+        ),
       },
       {
         path: "post-job",
-        element: <PostJob />,
+        element: (
+          <EmployerRoute>
+            <PostJob />
+          </EmployerRoute>
+        ),
       },
       {
         path: "all-applicants",
-        element: <AllApplicants />,
+        element: (
+          <EmployerRoute>
+            {" "}
+            <AllApplicants />
+          </EmployerRoute>
+        ),
       },
       {
         path: "video-call",
-        element: <VideoCall />,
+        element: (
+          <EmployerRoute>
+            <VideoCall />
+          </EmployerRoute>
+        ),
       },
 
       {
         path: "manage-job",
-        element: <ManageJob />,
+        element: (
+          <EmployerRoute>
+            <ManageJob />
+          </EmployerRoute>
+        ),
       },
     ],
   },
@@ -89,27 +120,51 @@ const router = createBrowserRouter([
     children: [
       {
         path: "dashboard-hero",
-        element: <CandidateDUi />,
+        element: (
+          <CandidateRoute>
+            <CandidateDUi />
+          </CandidateRoute>
+        ),
       },
       {
         path: "myProfile",
-        element: <CandidateProfile />,
+        element: (
+          <CandidateRoute>
+            <CandidateProfile />
+          </CandidateRoute>
+        ),
       },
       {
         path: "candidate-resume",
-        element: <CandidateResume />,
+        element: (
+          <CandidateRoute>
+            <CandidateResume />
+          </CandidateRoute>
+        ),
       },
       {
         path: "applied-jobs",
-        element: <AppliedJobs />,
+        element: (
+          <CandidateRoute>
+            <AppliedJobs />
+          </CandidateRoute>
+        ),
       },
       {
         path: "message",
-        element: <CandidateMessage />,
+        element: (
+          <CandidateRoute>
+            <CandidateMessage />
+          </CandidateRoute>
+        ),
       },
       {
         path: "video",
-        element: <CVideo />,
+        element: (
+          <CandidateRoute>
+            <CVideo />
+          </CandidateRoute>
+        ),
       },
     ],
   },

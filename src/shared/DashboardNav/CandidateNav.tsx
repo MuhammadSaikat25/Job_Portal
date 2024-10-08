@@ -8,11 +8,13 @@ import { MdOutlineWorkHistory } from "react-icons/md";
 import { RiMessage2Line } from "react-icons/ri";
 import { MdDashboardCustomize } from "react-icons/md";
 import { CiHome } from "react-icons/ci";
+import { logOut } from "../../redux/feature/auth/authSlice";
+import { useAppDispatch } from "../../redux/hooks";
 
 const CandidateNav = () => {
   const [menu, setMenu] = useState(false);
   const sidebarRef = useRef<HTMLDivElement | null>(null);
-
+  const dispatch = useAppDispatch();
   const handleClickOutside = (event: MouseEvent) => {
     if (
       sidebarRef.current &&
@@ -102,7 +104,9 @@ const CandidateNav = () => {
           <span>Message</span>
         </NavLink>
 
-        <NavLink to={"/"}>Logout</NavLink>
+        <NavLink onClick={() => {
+            dispatch(logOut());
+          }} to={"/"}>Logout</NavLink>
       </div>
       <div
         className={`fixed lg:hidden top-0 w-full text-white transition-all duration-500 bg-[#22218C] p-3`}
