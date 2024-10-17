@@ -51,6 +51,7 @@ const SingIn = ({ singUpModal, setSingUpModal, setLoginModal }: Props) => {
       role,
     };
     const res = await registration(userInfo);
+    console.log(res)
     if (res.error) {
       if ("data" in res.error) {
         const err = res.error as any;
@@ -59,13 +60,13 @@ const SingIn = ({ singUpModal, setSingUpModal, setLoginModal }: Props) => {
         }
       }
     }
-    if (res.data.success && setSingUpModal && setLoginModal) {
+    if (res?.data?.success && setSingUpModal && setLoginModal) {
       setTimeout(() => {
         setSingUpModal(false);
         setLoginModal(true);
       }, 600);
 
-      toast.success("Register successful ");
+      toast?.success("Register successful ");
     }
   };
 
@@ -89,8 +90,10 @@ const SingIn = ({ singUpModal, setSingUpModal, setLoginModal }: Props) => {
           <div
             onClick={() => setUserRole("candidate")}
             className={`${
-              userRole === "candidate" ? "bg-green-600" : "bg-blue-500"
-            } rounded p-1 text-white`}
+              userRole === "candidate"
+                ? "bg-green-600 text-white"
+                : "text-black"
+            } rounded p-1 text-black`}
           >
             <button className="flex items-center gap-1">
               <span>
@@ -101,8 +104,8 @@ const SingIn = ({ singUpModal, setSingUpModal, setLoginModal }: Props) => {
           </div>
           <div
             className={`${
-              userRole === "employer" ? "bg-green-600" : "bg-blue-500"
-            } rounded p-1 text-white`}
+              userRole === "Employer" ? "bg-green-600 text-white" : "text-black"
+            } rounded p-1 text-black`}
             onClick={() => setUserRole("Employer")}
           >
             <button className="flex items-center gap-1">

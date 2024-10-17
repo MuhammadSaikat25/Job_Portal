@@ -95,7 +95,7 @@ const AllApplicantsUi = () => {
   };
 
   return (
-    <div className="bg-[#d7d9de] min-h-full pb-10">
+    <div className="bg-[#d7d9de] h-svh pb-10">
       <Toaster />
       <h2 className="text-xl text-gray-900 font-sans py-20 lg:p-4">
         All Applicants!
@@ -174,7 +174,7 @@ const AllApplicantsUi = () => {
           </div>
         ))
       ) : (
-        <p>No users have applied for any jobs yet.</p>
+        <p className="lg:p-4">No users have applied for any jobs yet.</p>
       )}
 
       {resumeModal && (

@@ -39,31 +39,35 @@ const MessageNav = ({ setChatUser, chatUser, messageModal }: Props) => {
 
   return (
     <div className=" lg:w-[30%] relative">
-      <div className="lg:w-full hidden lg:block bg-white shadow-md rounded-md shadow-gray-300 h-[450px] overflow-y-auto p-4">
-        {appliedUser?.map((user: any, i: number) => (
-          <div
-            key={i}
-            className={`flex flex-col gap-y-5 ${
-              selectedApplicant === i ? "bg-blue-100" : ""
-            }`}
-          >
+      {appliedUser?.length > 0 ? (
+        <div className="lg:w-full hidden lg:block bg-white shadow-md rounded-md shadow-gray-300 h-[450px] overflow-y-auto p-4">
+          {appliedUser?.map((user: any, i: number) => (
             <div
-              className="flex items-start py-1 gap-x-2 cursor-pointer"
-              onClick={() => handleSelectApplicant(i, user)}
+              key={i}
+              className={`flex flex-col gap-y-5 ${
+                selectedApplicant === i ? "bg-blue-100" : ""
+              }`}
             >
-              <img
-                className="w-[60px] h-[60px] rounded-full cursor-pointer"
-                src={user.resume.candidateProfile.image || img}
-                alt=""
-              />
-              <div>
-                <p>{user.user.name}</p>
-                <p>{user.resume.candidateProfile.jobTitle}</p>
+              <div
+                className="flex items-start py-1 gap-x-2 cursor-pointer"
+                onClick={() => handleSelectApplicant(i, user)}
+              >
+                <img
+                  className="w-[60px] h-[60px] rounded-full cursor-pointer"
+                  src={user.resume.candidateProfile.image || img}
+                  alt=""
+                />
+                <div>
+                  <p>{user.user.name}</p>
+                  <p>{user.resume.candidateProfile.jobTitle}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p>You have no approved job application for chat .</p>
+      )}
       {/* -------------------------------------- */}
       {messageModal && (
         <div className="absolute z-50 h-[800px] lg:hidden bg-white shadow-md rounded-md shadow-gray-300 lg:h-[450px] overflow-y-auto p-4">

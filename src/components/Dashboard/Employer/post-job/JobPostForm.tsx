@@ -3,15 +3,17 @@ import { IoMdAdd, IoMdClose } from "react-icons/io";
 import { usePostJobMutation } from "../../../../redux/feature/employer/jobApi";
 import { useGetMyCompanyQuery } from "../../../../redux/feature/employer/companyApi";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const JobPostForm = () => {
   const [companyId, setCompanyId] = useState("");
   const [postJob] = usePostJobMutation();
   const { data } = useGetMyCompanyQuery(undefined);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    setCompanyId(data?.data._id);
+    setCompanyId(data?.data?._id);
   }, [data]);
+  console.log(companyId);
   const [responsibilities, setResponsibilities] = useState<string[]>([""]);
   const [skills, setSkills] = useState<string[]>([""]);
   const [title, setTitle] = useState("");
@@ -77,9 +79,10 @@ const JobPostForm = () => {
     const res = await postJob(jobPostData);
 
     if (res.error) {
+      console.log(res.error);
       toast.error("Something went wrong");
     }
-    
+
     if (res.data.success === true) {
       toast.success("job post successful");
     }
@@ -293,12 +296,23 @@ const JobPostForm = () => {
             />
           </div>
           {/* Submit Button */}
-          <button
-            type="submit"
-            className="mt-4 w-full py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600"
-          >
-            Post Job
-          </button>
+          {companyId ? (
+            <button
+              type="submit"
+              className="mt-4 w-full py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600"
+            >
+              Post Job
+            </button>
+          ) : (
+            <div
+              onClick={() => {
+                navigate("/employ-dashboard/company-profile");
+              }}
+              className="mt-10 w-full py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600 text-center"
+            >
+              Create company to post Job
+            </div>
+          )}
         </div>
       </form>
     </div>

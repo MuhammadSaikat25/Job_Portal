@@ -43,18 +43,22 @@ const Navbar = () => {
         {scroll >= 80 ? (
           <>
             <div className="flex items-center justify-around">
-              <img className="w-[40px]" src={logo} alt="" />
+              <Link to={"/"}>
+                <img className="w-[40px]" src={logo} alt="" />
+              </Link>
               <div className="flex items-center gap-5">
                 <Link to={""}>Home</Link>
                 <Link to={"/jobs"}>Find job</Link>
 
                 {!user && (
-                <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
-                  <button onClick={() => setLoginModal(true)}>Login</button>
-                  <p>/</p>
-                  <button onClick={() => setSingUpModal(true)}>Register</button>
-                </div>
-              )}
+                  <div className="flex items-center gap-2 border border-white px-3 py-1 rounded-2xl hover:bg-white hover:text-blue-600 duration-700 cursor-pointer">
+                    <button onClick={() => setLoginModal(true)}>Login</button>
+                    <p>/</p>
+                    <button onClick={() => setSingUpModal(true)}>
+                      Register
+                    </button>
+                  </div>
+                )}
                 {user?.role === "employer" && (
                   <Link to={"employ-dashboard/dashboard-hero"}>Dashboard</Link>
                 )}
@@ -66,7 +70,9 @@ const Navbar = () => {
           </>
         ) : (
           <div className="flex items-center justify-around">
-            <img className="w-[40px]" src={logo} alt="" />
+            <Link to={"/"}>
+              <img className="w-[40px]" src={logo} alt="" />
+            </Link>
             <div className="flex items-center gap-5">
               <Link to={""}>Home</Link>
               <Link to={"/jobs"}>Find job</Link>

@@ -42,32 +42,36 @@ const CMessageNav = ({ setChatUser, messageModal }: Props) => {
 
   return (
     <div className="lg:w-[20%] relative">
-      <div className="lg:block hidden w-[100%] bg-white shadow-md rounded-md shadow-gray-300 p-4 lg:h-[500px] overflow-hidden overflow-y-auto scrollbar-hide">
-        {companyList.map((company: any, i: number) => (
-          <div
-            key={i}
-            className={`flex flex-col gap-y-5 ${
-              selectedApplicant === i ? "bg-blue-100 p-1 my-3" : ""
-            }`}
-          >
+      {companyList?.length > 0 ? (
+        <div className="lg:block hidden w-[100%] bg-white shadow-md rounded-md shadow-gray-300 p-4 lg:h-[500px] overflow-hidden overflow-y-auto scrollbar-hide">
+          {companyList.map((company: any, i: number) => (
             <div
-              className="flex items-start gap-x-2 cursor-pointer"
-              onClick={() => handleSelectApplicant(i)}
+              key={i}
+              className={`flex flex-col gap-y-5 ${
+                selectedApplicant === i ? "bg-blue-100 p-1 my-3" : ""
+              }`}
             >
-              <img
-                className="w-[40px] h-[40px] rounded-full"
-                src={company.job.company.image}
-                alt=""
-              />
-              <div>
-                <p>{company.job.company.companyName}</p>
+              <div
+                className="flex items-start gap-x-2 cursor-pointer"
+                onClick={() => handleSelectApplicant(i)}
+              >
+                <img
+                  className="w-[40px] h-[40px] rounded-full"
+                  src={company.job.company.image}
+                  alt=""
+                />
+                <div>
+                  <p>{company.job.company.companyName}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p>You have no approved job application for chat .</p>
+      )}
       {messageModal && (
-      <div className="absolute z-50 h-[800px] lg:hidden bg-white shadow-md rounded-md shadow-gray-300 lg:h-[450px] overflow-y-auto">
+        <div className="absolute z-50 h-[800px] lg:hidden bg-white shadow-md rounded-md shadow-gray-300 lg:h-[450px] overflow-y-auto">
           {companyList.map((company: any, i: number) => (
             <div
               key={i}

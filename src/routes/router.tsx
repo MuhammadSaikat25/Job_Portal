@@ -21,7 +21,7 @@ import VideoCall from "../pages/Dashboard/Employer/VideoCall";
 import CVideo from "../pages/Dashboard/candidate/CVideo";
 import CandidateDUi from "../components/Dashboard/candidate/CandidateDUi";
 import CandidateRoute from "./privet-route/CandidateRoute";
-import EmployerRoute from "./privet-route/employerRoute";
+import EmployerRoute from "./privet-route/EmployerRoute";
 
 const router = createBrowserRouter([
   {
@@ -90,7 +90,6 @@ const router = createBrowserRouter([
         path: "all-applicants",
         element: (
           <EmployerRoute>
-            {" "}
             <AllApplicants />
           </EmployerRoute>
         ),

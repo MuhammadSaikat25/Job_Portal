@@ -42,83 +42,89 @@ const ManageJobUi = () => {
     };
   }, [editModal]);
   return (
-    <div className="p-5">
+    <div className="p-5 h-screen">
       <h1 className="pb-3 text-gray-950 font-semibold">Manage jobs!</h1>
       <Toaster />
-      <TableContainer component={Paper} className="h-[30%] scroll-container">
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead className="bg-blue-300">
-            <TableRow>
-              <TableCell className="text-blue-500">Title</TableCell>
-              <TableCell className="text-blue-500">Applications</TableCell>
-              <TableCell className="text-blue-500">Created & Expired</TableCell>
-              <TableCell className="text-blue-500">Status</TableCell>
-              <TableCell className="text-blue-500">Action</TableCell>
-            </TableRow>
-          </TableHead>
+      {rows?.length > 0 ? (
+        <TableContainer component={Paper} className="h-[30%] scroll-container">
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead className="bg-blue-300">
+              <TableRow>
+                <TableCell className="text-blue-500">Title</TableCell>
+                <TableCell className="text-blue-500">Applications</TableCell>
+                <TableCell className="text-blue-500">
+                  Created & Expired
+                </TableCell>
+                <TableCell className="text-blue-500">Status</TableCell>
+                <TableCell className="text-blue-500">Action</TableCell>
+              </TableRow>
+            </TableHead>
 
-          <TableBody>
-            {rows?.map((row: any, i: number) => (
-              <TableRow
-                key={i}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <div className="flex items-start gap-x-2">
-                    <img
-                      className="w-[60px] h-[60px] rounded"
-                      src={row.company.image}
-                      alt=""
-                    />
-                    <div className="">
-                      <p className="mb-2 text-gray-950 text-[18px]">
-                        {row.title}
-                      </p>
-                      <div className="flex items-center text-gray-500 gap-x-2">
-                        <div className="flex items-center gap-x-1">
-                          <img className="w-[12px]" src={bag} alt="" />
-                          <p>{row.company.companyName}</p>
-                        </div>
-                        <div className="flex items-center gap-x-1">
-                          <FaLocationPin />
-                          <p>{row.country}</p>
+            <TableBody>
+              {rows?.map((row: any, i: number) => (
+                <TableRow
+                  key={i}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <div className="flex items-start gap-x-2">
+                      <img
+                        className="w-[60px] h-[60px] rounded"
+                        src={row.company.image}
+                        alt=""
+                      />
+                      <div className="">
+                        <p className="mb-2 text-gray-950 text-[18px]">
+                          {row.title}
+                        </p>
+                        <div className="flex items-center text-gray-500 gap-x-2">
+                          <div className="flex items-center gap-x-1">
+                            <img className="w-[12px]" src={bag} alt="" />
+                            <p>{row.company.companyName}</p>
+                          </div>
+                          <div className="flex items-center gap-x-1">
+                            <FaLocationPin />
+                            <p>{row.country}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row?.applied} Applied
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  <p> {row?.createdAt.split("T")[0]}</p>
-                  <p> {row?.deadline.split("T")[0]}</p>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  <p
-                    className={`${
-                      row.deadline > currentDate
-                        ? "text-green-600"
-                        : "text-red-600"
-                    }`}
-                  >
-                    {row.deadline > currentDate ? "Active" : "Expired"}
-                  </p>
-                </TableCell>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {row?.applied} Applied
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <p> {row?.createdAt.split("T")[0]}</p>
+                    <p> {row?.deadline.split("T")[0]}</p>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <p
+                      className={`${
+                        row.deadline > currentDate
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }`}
+                    >
+                      {row.deadline > currentDate ? "Active" : "Expired"}
+                    </p>
+                  </TableCell>
 
-                <TableCell component="th" scope="row">
-                  <button
-                    onClick={() => handelEdit(row._id)}
-                    className="text-white bg-blue-700 p-1 rounded-sm"
-                  >
-                    Edit Job
-                  </button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                  <TableCell component="th" scope="row">
+                    <button
+                      onClick={() => handelEdit(row._id)}
+                      className="text-white bg-blue-700 p-1 rounded-sm"
+                    >
+                      Edit Job
+                    </button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <p className="">You have no job for manage please post job </p>
+      )}
       {editModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-5">
           <div

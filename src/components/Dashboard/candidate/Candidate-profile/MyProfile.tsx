@@ -44,7 +44,7 @@ const MyProfile = ({ setCandidateImage }: Props) => {
     }
   };
   useEffect(() => {
-    setImage(data?.data.image);
+    setImage(data?.data?.image);
   }, [data]);
   return (
     <div className="w-full my-3 ">
